@@ -10,7 +10,7 @@ function GlobalNav() {
       <div className="flex justify-end gap-x-2 text-gray-500">
         <Link href="/example">Example</Link>
         <a
-          className="ml-2 flex items-center gap-x-1"
+          className="flex items-center gap-x-1"
           href="https://github.com/bysxx/next-ts-template-tailwind"
           target="_blank"
           rel="noreferrer"

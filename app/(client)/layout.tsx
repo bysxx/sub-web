@@ -1,7 +1,5 @@
 import '@styles/global.css';
 
-import Footer from '@components/ui/footer';
-import GlobalNav from '@components/ui/global-nav';
 import { Raleway } from 'next/font/google';
 
 import { Providers } from './provider';
@@ -18,9 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ko">
       <body className={raleway.className}>
         <Providers>
-          <GlobalNav />
-          {children}
-          <Footer />
+          <div className="mx-auto max-w-xl shadow-md">{children}</div>
         </Providers>
       </body>
     </html>
