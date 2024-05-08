@@ -1,10 +1,6 @@
 import '@styles/global.css';
 
-import { Raleway } from 'next/font/google';
-
 import { Providers } from './provider';
-
-const raleway = Raleway({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Next14 TypeScript Template',
@@ -14,9 +10,9 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
-      <body className={raleway.className}>
+      <body>
         <Providers>
-          <div className="mx-auto max-w-xl shadow-md">{children}</div>
+          <div className="mx-auto max-w-xl leading-tight shadow-md">{children}</div>
         </Providers>
       </body>
     </html>

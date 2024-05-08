@@ -15,10 +15,26 @@ module.exports = {
           b200: '#5396F1',
           d400: '#002448',
         },
+        secondary: {
+          b100: '#BCD8FF',
+          y100: '#FFB74B',
+          d300: '#596874',
+          d400: '#002448',
+          r100: '#FF705C',
+        },
+      },
+      width: {
+        47: '11.75rem',
+        100: '25rem',
+      },
+      minWidth: {
+        47: '11.75rem',
+        100: '25rem',
       },
     },
   },
-  plugins: [],
+  // eslint-disable-next-line global-require
+  plugins: [require('tailwind-scrollbar-hide')],
   extend: {
     display: ['group-hover'],
   },

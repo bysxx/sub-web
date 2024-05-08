@@ -62,6 +62,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.2.5"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:bf5ea1d8a137e1631bb630a53e89f1f8daa174be04db3b18f18e0beba46539a7b0355a11c08a30259564a299ceaa82f4082e1c5399246ecf978b60bd796e29a6#npm:18.2.0"],\
+          ["tailwind-scrollbar-hide", "npm:1.1.7"],\
           ["tailwindcss", "npm:3.4.3"],\
           ["typescript", "patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"],\
           ["yarn-upgrade-all", "npm:0.7.2"],\
@@ -7760,6 +7761,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.2.5"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:bf5ea1d8a137e1631bb630a53e89f1f8daa174be04db3b18f18e0beba46539a7b0355a11c08a30259564a299ceaa82f4082e1c5399246ecf978b60bd796e29a6#npm:18.2.0"],\
+          ["tailwind-scrollbar-hide", "npm:1.1.7"],\
           ["tailwindcss", "npm:3.4.3"],\
           ["typescript", "patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"],\
           ["yarn-upgrade-all", "npm:0.7.2"],\
@@ -9338,6 +9340,15 @@ const RAW_RUNTIME_STATE =
           ["synckit", "npm:0.8.8"],\
           ["@pkgr/core", "npm:0.1.1"],\
           ["tslib", "npm:2.6.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["tailwind-scrollbar-hide", [\
+      ["npm:1.1.7", {\
+        "packageLocation": "./.yarn/cache/tailwind-scrollbar-hide-npm-1.1.7-537baa5b75-2434a1db7a.zip/node_modules/tailwind-scrollbar-hide/",\
+        "packageDependencies": [\
+          ["tailwind-scrollbar-hide", "npm:1.1.7"]\
         ],\
         "linkType": "HARD"\
       }]\
