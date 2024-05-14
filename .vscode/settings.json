@@ -7,7 +7,7 @@
     "**/.yarn": true,
     "**/.pnp.*": true
   },
-  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint", //"dbaeumer.vscode-eslint" or "esbenp.prettier-vscode"
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
