@@ -1,6 +1,7 @@
 import StockContainer from './stock-container';
 import Header from '../../../src/components/ui/header';
 import NewsList from './news-list';
+import Link from 'next/link';
 
 
 export default function MainPage() {
@@ -20,9 +21,13 @@ export default function MainPage() {
       <StockContainer />
 
       <div className="w-full p-6 rounded-[20px] bg-[#ECF0F3]">
-        <img className="mb-6"></img>
+        <Link href="/news">
+          <button className="flex justify-center w-full">
+            <div className="mb-6 w-10 h-0 border-[1px] border-white round-full"></div>
+          </button>
+        </Link>
         <h1 className="text-[22px] font-bold mb-4">오늘의 소식</h1>
-        <ul className="mt-4 flex flex-col w-full overflow-x-hidden scrollbar-hide divide-y divide-[#D0DCE5]">
+        <ul role="list" className="mt-4 flex flex-col w-full overflow-x-hidden scrollbar-hide divide-y divide-[#D0DCE5]">
           <NewsList />
           <NewsList />
           <NewsList />
