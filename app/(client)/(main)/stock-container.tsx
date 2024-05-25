@@ -1,6 +1,8 @@
 import StockCard from './stock-chip';
 import Link from 'next/link';
 
+import { stockdummys } from '../../../src/dummydata/stock-data';
+
 export default function StockContainer() {
   return (
     <div className="w-full">
@@ -11,11 +13,16 @@ export default function StockContainer() {
         </Link>
       </div>
       <ul className="mt-4 flex w-full gap-3 overflow-scroll scrollbar-hide">
-        <StockCard />
-        <StockCard />
-        <StockCard />
-        <StockCard />
-        <StockCard />
+        {stockdummys.map((stock) => (
+          <StockCard 
+            key={stock.id}
+            id={stock.id}
+            name={stock.name}
+            price={stock.price}
+            changeRate={stock.changeRate}
+            // imageUrl={stock.imageUrl}
+          />
+        ))}
       </ul>
     </div>
   );

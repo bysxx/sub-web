@@ -1,6 +1,8 @@
 import { Stock } from "./stock";
 import Image from 'next/image';
 
+import { stockdummys } from '../../../../src/dummydata/stock-data';
+
 export default function StockListPage() {
   return (
     <main className="flex min-h-screen w-full flex-col items-center p-8">
@@ -20,22 +22,17 @@ export default function StockListPage() {
           </div>      
         </div>
         {/* Stock List*/}
-        <div className="grid grid-rows-1 mt-12 gap-4"> {/* flex flex-col */}
-          {/* {stocks.map((stock) => (
+        <div className="grid grid-rows-1 mt-12 gap-4">
+          {stockdummys.map((stock) => (
             <Stock 
               key={stock.id}
               id={stock.id}
               name={stock.name}
               price={stock.price}
               changeRate={stock.changeRate}
-              imageUrl={stock.imageUrl}
+              // imageUrl={stock.imageUrl}
             />
-          ))} */}
-          <Stock />
-          <Stock />
-          <Stock />
-          <Stock />
-          <Stock />
+          ))}
         </div>
       </div>
     </main>

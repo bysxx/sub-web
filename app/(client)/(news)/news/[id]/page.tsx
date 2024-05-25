@@ -5,5 +5,9 @@
 //   return <NewsDetail news={news} />;
 // }
 export default function NewsDetailPage() {
-  return <h1>오늘의 소식 페이지 뉴스 중 하나</h1>
+  return (
+    <main className="min-h-screen w-full p-8">
+      <h1>오늘의 소식 페이지 뉴스 중 하나</h1>
+    </main>
+  );
 }
