@@ -4,8 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 export default function UsernamePage() {
-  const [username, setUsername] = useState('');
-
+  const [username, setUsername] = useState('');   
   const isButtonDisabled = username.trim().length < 2; 
 
   return (

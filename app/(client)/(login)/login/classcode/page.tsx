@@ -30,7 +30,7 @@ export default function UsernamePage() {
           {isButtonDisabled ? (
             <Image src="/images/icon/Boot_Button01.svg" alt="next" width={80} height={80} />
           ) : (
-            <Link href="/login/ready">
+            <Link href="/login/username">
               <Image src="/images/icon/Boot_Button01.svg" alt="next" width={80} height={80} />
             </Link>
           )}
