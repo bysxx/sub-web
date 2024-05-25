@@ -1,20 +1,22 @@
 import { Stock } from "./stock";
+import Image from 'next/image';
 
 export default function StockListPage() {
   return (
     <main className="flex min-h-screen w-full flex-col items-center p-8">
       <div className="w-full mt-8 ">
         {/* Search Box */}
-        <div className="relative min-w-47 rounded-[20px] shadow-xl bg-white p-2 b-5">
+        <div className="relative min-w-47 rounded-[20px] shadow-xl bg-white p-2">
           <div className="flex justify-between gap-2">
-            <div className="flex p-3 b-3 gap-2 rounded-xl bg-[#ECF0F3] w-full">
-              <div className="text-[18px]">🔍</div> {/* 나중에 svg로 대체 */}
-              {/* <div className="text-[18px] text-secondary-d300">종목 검색</div> */}
+            <div className="flex p-3 gap-2 rounded-xl bg-[#ECF0F3] w-full">
+              <Image src="/images/icon/icon-search.svg" alt="search" width={12} height={12} className="opacity-50" />
               <input type="text" placeholder="종목 검색" className="w-full focus:outline-0 bg-transparent text-[18px] text-secondary-d300" />
             </div>
-            <div className="">
-              <button className="rounded-xl bg-primary-b200 size-12"></button>
-            </div>          
+            <div>
+              <button className="size-12">
+                <Image src="/images/icon/SB_Button_Filter.svg" alt="search-button" width={100} height={100} />
+              </button>
+            </div>
           </div>      
         </div>
         {/* Stock List*/}

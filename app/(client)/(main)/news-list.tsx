@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function NewsList() {
   return (
@@ -11,8 +12,9 @@ export default function NewsList() {
           </div>
         </div>
         <div className="flex items-center">
-          <div className="h-12 w-12 ml-4 mr-2 flex-none bg-white rounded-[20px] shadow"></div>
-          {/* 나중에 <img className="h-12 w-12 ml-4 mr-2 flex-none bg-white rounded-[20px] shadow" src={person.imageUrl} alt="" /> */}
+          <div className="h-12 w-12 ml-4 mr-2 flex justify-center bg-white rounded-[12px] shadow">
+            <Image src="/images/icon/Icon-Profile-teacher.svg" alt="profileimg" width={35} height={35} />
+          </div>
         </div>
       </li>
     </Link>

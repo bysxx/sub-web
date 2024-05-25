@@ -7,7 +7,6 @@ function Header() {
   return (
     <div className="w-full">
       <div className="flex gap-1">
-        {/* <LogoSVG />  */}
         <Image src="/logo.svg" alt="logo" width={22} height={22} />
         <h1 className="text-[22px] font-bold">SUB</h1>
       </div>
