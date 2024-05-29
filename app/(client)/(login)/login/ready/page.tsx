@@ -3,9 +3,9 @@ import Link from 'next/link';
 
 export default function StartPage() {
   return (
-    <div className="w-full min-h-screen">
+    <div className="min-h-screen w-full">
       <div className="flex flex-col items-center">
-        <div className="flex flex-col items-center pt-40 pb-34">
+        <div className="flex flex-col items-center pb-[8.5rem] pt-40">
           <Image src="/logo.svg" alt="logo" width={160} height={160} />
           <div className="text-[32px] font-bold">시작해볼까요?</div>
         </div>
