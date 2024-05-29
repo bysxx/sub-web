@@ -19,21 +19,16 @@ export async function getStockUserRank(roomId: string, stockId: string) {
   const session = await startSession();
   session.startTransaction();
   try {
-    console.log(stockId);
     const userIds = await roomRepo.getUserIdByRoom(roomId);
-    console.log(userIds);
-    const product: IUser[] = [];
 
-    for (const userId of userIds) {
-      const user = await userRepo.findUserDetailById(userId);
+    const users = await Promise.all(
+      userIds.map(async (userId) => {
+        const user = await userRepo.findUserDetailById(userId);
+        return user && user.stockAssets.some((asset) => asset.stockId === stockId) ? user : null;
+      }),
+    );
 
-      if (user) {
-        const hasStock = user.stockAssets.some((asset: IUserStockAsset) => asset.stockId === stockId);
-        if (hasStock) {
-          product.push(user);
-        }
-      }
-    }
+    const product = users.filter((user) => user !== null);
 
     await session.commitTransaction();
     session.endSession();

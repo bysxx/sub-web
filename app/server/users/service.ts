@@ -14,6 +14,47 @@ export async function getOneUser(userId: string) {
   return userRepo.findUserDetailById(userId);
 }
 
+export async function getTotalBalanceByUser(userId: string) {
+  try {
+    const user = await userRepo.findUserDetailById(userId);
+
+    const stockValues = await Promise.all(
+      user.stockAssets.map(async (asset) => {
+        const stock = await stockRepo.findStockDetailById(asset.stockId);
+        return stock ? stock.price * asset.count : 0;
+      }),
+    );
+
+    // 유저의 잔고와 주식 자산의 합계
+    const product = user.balance + stockValues.reduce((acc, value) => acc + value, 0);
+
+    return { success: true, message: 'TotalBalance', product };
+  } catch (error) {
+    return { success: false, message: error.message };
+  }
+}
+
+export async function getStockChipByUserAndStock(userId: string, stockId: string) {
+  try {
+    const user = await userRepo.findUserDetailById(userId);
+    const stock = await stockRepo.findStockDetailById(stockId);
+    const stockAsset = user.stockAssets.find((asset) => asset.stockId === stockId);
+    // 유저의 잔고와 주식 자산의 합계
+    const Valuation = stockAsset.count * stockAsset.average;
+    const ROI = (stock.price - stockAsset.average) / stockAsset.average;
+
+    return {
+      success: true,
+      message: 'StockChip',
+      product: {
+        Valuation,
+        ROI,
+      },
+    };
+  } catch (error) {
+    return { success: false, message: error.message };
+  }
+}
 
 export async function createUser(countryCode: number, nickname: string) {
   await dbConnect();
@@ -58,15 +99,16 @@ export async function buyStock(userId: string, stockId: string, buyCount: string
       };
       await userRepo.addStockAssetToUser(userId, newStockAsset);
     }
-		if (!stockAsset) {
-			const newCount = buyCount;
-			const newAverage = stock.price; 
-			await userRepo.updateStockAssetByUser(userId, stockId, newCount, newAverage);
-		} else {
-			const newCount = stockAsset.count + buyCount;
-			const newAverage = (stockAsset.average * stockAsset.count + stock.price * buyCount) / (stockAsset.count + buyCount);
-			await userRepo.updateStockAssetByUser(userId, stockId, newCount, newAverage);
-		}
+    if (!stockAsset) {
+      const newCount = buyCount;
+      const newAverage = stock.price;
+      await userRepo.updateStockAssetByUser(userId, stockId, newCount, newAverage);
+    } else {
+      const newCount = stockAsset.count + buyCount;
+      const newAverage =
+        (stockAsset.average * stockAsset.count + stock.price * buyCount) / (stockAsset.count + buyCount);
+      await userRepo.updateStockAssetByUser(userId, stockId, newCount, newAverage);
+    }
     const newUser: IUser = {
       balance: newBalace,
     };

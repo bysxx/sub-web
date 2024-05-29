@@ -2,27 +2,13 @@ import { NextResponse } from 'next/server';
 
 import * as service from '../../service';
 
-export async function GET(_: Request) {
-  const data = await service.getUser();
-
-  return NextResponse.json(data);
-}
-
-export async function PATCH(request: Request) {
+export async function GET(request: Request) {
   const url = new URL(request.url, `http://${request.headers.host}`);
   const { pathname } = url;
   const segments = pathname.split('/');
-  const stockId = segments[3];
+  const userId = segments[3];
+  const stockId = segments[4];
 
-  const session = await request.json();
-  const { userId, sellCount } = session;
-  const data = await service.sellStock(userId, stockId, sellCount);
+  const data = await service.getStockChipByUserAndStock(userId, stockId);
   return NextResponse.json(data);
-}
-
-export async function DELETE(request: Request) {
-  const session = await request.json();
-  const { userId } = session;
-  await service.deleteUser(userId);
-  return NextResponse.json(``);
 }
