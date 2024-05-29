@@ -16,8 +16,8 @@ export async function createRoom({ name, setting }: Pick<IRoom, 'name' | 'settin
       name,
       setting,
     };
-    await repo.createRoom(room);
-    return { success: true, message: 'Room added successfully' };
+    const product = await repo.createRoom(room);
+    return { success: true, message: 'Room added successfully', product };
   } catch (error) {
     return { success: false, message: error.message };
   }
@@ -25,8 +25,8 @@ export async function createRoom({ name, setting }: Pick<IRoom, 'name' | 'settin
 
 export async function deleteRoom(id: string) {
   try {
-    await repo.deleteRoom(id);
-    return { success: true, message: 'Room deleted successfully' };
+    const product = await repo.deleteRoom(id);
+    return { success: true, message: 'Room deleted successfully', product };
   } catch (error) {
     return { success: false, message: error.message };
   }
@@ -35,7 +35,8 @@ export async function deleteRoom(id: string) {
 // 특정방에 존재하는 힌트 조회
 export async function getHint(roomId: string) {
   try {
-    return await repo.getHintByRoom(roomId);
+    const product = await repo.getHintByRoom(roomId);
+    return { success: true, message: 'Hint find successfully', product };
   } catch (error) {
     return { success: false, message: error.message };
   }
@@ -48,8 +49,8 @@ export async function addHint(roomId: string, userId: string, title: string, des
       title,
       description,
     };
-    await repo.addHintToRoom(roomId, hint);
-    return { success: true, message: 'Hint added successfully' };
+    const product = await repo.addHintToRoom(roomId, hint);
+    return { success: true, message: 'Hint added successfully', product };
   } catch (error) {
     return { success: false, message: error.message };
   }
@@ -57,8 +58,8 @@ export async function addHint(roomId: string, userId: string, title: string, des
 
 export async function dropHint(roomId: string, hintId: string) {
   try {
-    await repo.removeHintFromRoom(roomId, hintId);
-    return { success: true, message: 'Hint delete successfully' };
+    const product = await repo.removeHintFromRoom(roomId, hintId);
+    return { success: true, message: 'Hint delete successfully', product };
   } catch (error) {
     return { success: false, message: error.message };
   }
@@ -67,8 +68,8 @@ export async function dropHint(roomId: string, hintId: string) {
 // 특정방에 존재하는 유저 조회
 export async function getUser(roomId: string) {
   try {
-    await repo.getUserIdByRoom(roomId);
-    return { success: true, message: 'User added successfully' };
+    const product = await repo.getUserIdByRoom(roomId);
+    return { success: true, message: 'User find successfully', product };
   } catch (error) {
     return { success: false, message: error.message };
   }
@@ -76,8 +77,8 @@ export async function getUser(roomId: string) {
 
 export async function addUser(roomId: string, userId: string) {
   try {
-    await repo.addUserIdToRoom(roomId, userId);
-    return { success: true, message: 'User added successfully' };
+    const product = await repo.addUserIdToRoom(roomId, userId);
+    return { success: true, message: 'User added successfully', product };
   } catch (error) {
     return { success: false, message: error.message };
   }
@@ -85,8 +86,8 @@ export async function addUser(roomId: string, userId: string) {
 
 export async function dropUser(roomId: string, userId: string) {
   try {
-    await repo.removeUserIdFromRoom(roomId, userId);
-    return { success: true, message: 'User delete successfully' };
+    const product = await repo.removeUserIdFromRoom(roomId, userId);
+    return { success: true, message: 'User delete successfully', product };
   } catch (error) {
     return { success: false, message: error.message };
   }
@@ -95,8 +96,8 @@ export async function dropUser(roomId: string, userId: string) {
 // 특정방에 존재하는 주식Id조회
 export async function getStock(roomId: string) {
   try {
-    await repo.getStockIdByRoom(roomId);
-    return { success: true, message: 'Stock added successfully' };
+    const product = await repo.getStockIdByRoom(roomId);
+    return { success: true, message: 'Stock find successfully', product };
   } catch (error) {
     return { success: false, message: error.message };
   }
@@ -104,8 +105,8 @@ export async function getStock(roomId: string) {
 
 export async function addStock(roomId: string, stockId: string) {
   try {
-    await repo.addStockIdToRoom(roomId, stockId);
-    return { success: true, message: 'Stock added successfully' };
+    const product = await repo.addStockIdToRoom(roomId, stockId);
+    return { success: true, message: 'Stock added successfully', product };
   } catch (error) {
     return { success: false, message: error.message };
   }
@@ -113,8 +114,8 @@ export async function addStock(roomId: string, stockId: string) {
 
 export async function dropStock(roomId: string, stockId: string) {
   try {
-    await repo.removeStockIdFromRoom(roomId, stockId);
-    return { success: true, message: 'Stock drop successfully' };
+    const product = await repo.removeStockIdFromRoom(roomId, stockId);
+    return { success: true, message: 'Stock drop successfully', product };
   } catch (error) {
     return { success: false, message: error.message };
   }

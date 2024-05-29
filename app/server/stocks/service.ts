@@ -11,7 +11,13 @@ export async function getStock() {
 }
 
 export async function getOneStock(stockId: string) {
-  return stockRepo.findStockDetailById(stockId);
+  try {
+    const product = await stockRepo.findStockDetailById(stockId);
+
+    return { success: true, message: 'One stock find successfully', product };
+  } catch (error) {
+    return { success: false, message: error.message };
+  }
 }
 
 export async function getStockUserRank(roomId: string, stockId: string) {

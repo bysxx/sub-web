@@ -3,9 +3,9 @@ import type { Model } from 'mongoose';
 import mongoose, { model } from 'mongoose';
 
 const hintSchema = new mongoose.Schema({
-  userId: { type: String, required: false },
-  title: { type: String, required: false },
-  description: { type: String, required: false },
+  userId: { type: String, required: true },
+  title: { type: String, required: true },
+  description: { type: String, required: true },
 });
 
 const settingSchema = new mongoose.Schema({

@@ -11,7 +11,13 @@ export async function getUser() {
 }
 
 export async function getOneUser(userId: string) {
-  return userRepo.findUserDetailById(userId);
+  try {
+    const product = await userRepo.findUserDetailById(userId);
+
+    return { success: true, message: 'user find successfully', product };
+  } catch (error) {
+    return { success: false, message: error.message };
+  }
 }
 
 export async function getTotalBalanceByUser(userId: string) {
@@ -145,10 +151,10 @@ export async function sellStock(userId: string, stockId: string, sellCount: stri
     const newUser: IUser = {
       balance: newBalace,
     };
-    await userRepo.updateUser(userId, newUser);
     const newCount = stockAsset.count - sellCount;
     const newAverage = stockAsset.average;
-    const product = await userRepo.updateStockAssetByUser(userId, stockId, newCount, newAverage);
+    await userRepo.updateStockAssetByUser(userId, stockId, newCount, newAverage);
+    const product = await userRepo.updateUser(userId, newUser);
     await session.commitTransaction();
     session.endSession();
     return { success: true, message: 'Stock purchased successfully.', product };
