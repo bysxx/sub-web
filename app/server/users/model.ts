@@ -9,10 +9,10 @@ const userStockAssetSchema = new mongoose.Schema({
 });
 
 const userSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  nickname: { type: String, required: true },
   roomId: { type: String, required: true },
-  stockAssets: [userStockAssetSchema], // IUserStockAsset 객체의 배열
+  stockAssets: [userStockAssetSchema],
   balance: { type: Number, required: true },
 });
 
-export default (mongoose.models.User || model<IUser>('user', userSchema)) as Model<IUser>;
+export default (mongoose.models.user || model<IUser>('user', userSchema)) as Model<IUser>;

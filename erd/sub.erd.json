@@ -4,8 +4,13 @@
   "settings": {
     "width": 2000,
     "height": 2000,
+<<<<<<< Updated upstream
     "scrollTop": -179.6389,
     "scrollLeft": -54.9807,
+=======
+    "scrollTop": -359.0894,
+    "scrollLeft": -220.8982,
+>>>>>>> Stashed changes
     "zoomLevel": 0.8,
     "show": 431,
     "database": 4,
@@ -143,15 +148,15 @@
           "vQE_IH2CAM6LxgpTSxbU4"
         ],
         "ui": {
-          "x": 400.25,
-          "y": 114,
+          "x": 441.5,
+          "y": 112.75,
           "zIndex": 115,
           "widthName": 60,
           "widthComment": 60,
           "color": ""
         },
         "meta": {
-          "updateAt": 1716370712245,
+          "updateAt": 1716714398714,
           "createAt": 1715245740177
         }
       },
@@ -208,7 +213,7 @@
           "color": ""
         },
         "meta": {
-          "updateAt": 1716368632265,
+          "updateAt": 1716790515708,
           "createAt": 1715598124059
         }
       }
@@ -397,20 +402,20 @@
       "qGNA-7c3K9t_ts6ZZgaWJ": {
         "id": "qGNA-7c3K9t_ts6ZZgaWJ",
         "tableId": "yd8Vmd1nJKh7R8-tt2DuW",
-        "name": "stockAsset",
+        "name": "stockAssets",
         "comment": "보류",
-        "dataType": "{stock_id, count, avg}[]",
+        "dataType": "{stockId, count, avg}[]",
         "default": "[]",
         "options": 0,
         "ui": {
           "keys": 0,
-          "widthName": 64,
+          "widthName": 71,
           "widthComment": 60,
-          "widthDataType": 134,
+          "widthDataType": 128,
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1716369992682,
+          "updateAt": 1716791154558,
           "createAt": 1715245661439
         }
       },
@@ -657,20 +662,20 @@
       "OlEu4OlWMX7pFQBb1t2SV": {
         "id": "OlEu4OlWMX7pFQBb1t2SV",
         "tableId": "QmgdKVvRLeU3lIylMfZj_",
-        "name": "num",
+        "name": "countryCode",
         "comment": "유니크",
         "dataType": "num",
-        "default": "auto",
+        "default": "setting",
         "options": 8,
         "ui": {
           "keys": 0,
-          "widthName": 60,
+          "widthName": 75,
           "widthComment": 60,
           "widthDataType": 60,
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1716368555128,
+          "updateAt": 1716714375384,
           "createAt": 1715246414871
         }
       },
@@ -1132,8 +1137,8 @@
       1715245661439,
       -1,
       {
-        "name": 1715598965307,
-        "dataType": 1715246960046,
+        "name": 1716708783463,
+        "dataType": 1716791154557,
         "default": 1715251034196,
         "comment": 1716369992682
       }
@@ -1268,9 +1273,9 @@
       1715246414871,
       -1,
       {
-        "name": 1715253696704,
+        "name": 1716714234625,
         "dataType": 1716368555127,
-        "default": 1715251001383,
+        "default": 1716714375383,
         "comment": 1716368534839,
         "options(notNull)": 1715598058085
       }
@@ -1380,7 +1385,7 @@
       1715598124058,
       -1,
       {
-        "name": 1715598128575,
+        "name": 1716790515707,
         "comment": 1715598131937
       }
     ],

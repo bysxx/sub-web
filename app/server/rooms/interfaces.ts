@@ -11,7 +11,7 @@ export interface ISetting {
 }
 
 export interface IRoom {
-  num: number;
+  countryCode: number;
   name: string;
   adminId: string;
   userIds: string[];

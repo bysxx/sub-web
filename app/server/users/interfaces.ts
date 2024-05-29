@@ -5,7 +5,7 @@ export interface IUserStockAsset {
 }
 
 export interface IUser {
-  name: string;
+  nickname: string;
   roomId: string;
   stockAssets: IUserStockAsset[];
   balance: number;

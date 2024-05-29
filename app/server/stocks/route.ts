@@ -2,29 +2,23 @@ import { NextResponse } from 'next/server';
 
 import * as service from './service';
 
-export async function GET(_: Request) {
-  const data = await service.getStock();
-
-  return NextResponse.json(data);
-}
-
 export async function POST(request: Request) {
   const session = await request.json();
-  const { price, name, description } = session;
-  const data = await service.createStock('a', { price, name, description });
+  const { roomId, price, value, name, description, valuePerRate } = session;
+  const data = await service.createStock(roomId, price, value, name, description, valuePerRate);
   return NextResponse.json(data);
 }
 
 export async function PATCH(request: Request) {
   const session = await request.json();
-  const { id, price } = session;
-  const data = await service.updateStock(id, price);
+  const { stockId, newValue } = session;
+  const data = await service.updateStockValue(stockId, newValue);
   return NextResponse.json(data);
 }
 
 export async function DELETE(request: Request) {
   const session = await request.json();
-  const { id } = session;
-  await service.deleteStock(id);
+  const { roomId, stockId } = session;
+  await service.deleteStock(roomId, stockId);
   return NextResponse.json(``);
 }

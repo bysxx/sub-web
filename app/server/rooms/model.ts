@@ -15,7 +15,7 @@ const settingSchema = new mongoose.Schema({
 });
 
 const roomSchema = new mongoose.Schema({
-  num: { type: Number, required: true },
+  countryCode: { type: Number, required: true },
   name: { type: String, required: true },
   adminId: { type: String, required: false },
   userIds: [{ type: String }],
@@ -24,4 +24,4 @@ const roomSchema = new mongoose.Schema({
   setting: { type: settingSchema, required: true },
 });
 
-export default (mongoose.models.Room || model<IRoom>('room', roomSchema)) as Model<IRoom>;
+export default (mongoose.models.room || model<IRoom>('room', roomSchema)) as Model<IRoom>;
