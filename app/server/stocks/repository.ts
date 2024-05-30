@@ -56,7 +56,7 @@ export const updateStock = async (stockId: string, newStock: IStock) => {
 // id에 해당하는 주식 삭제
 export const deleteStock = async (id: string) => {
   await dbConnect();
-  await Stock.findByIdAndDelete(id);
+  return Stock.findByIdAndDelete(id);
 };
 
 // stock에 로그 추가

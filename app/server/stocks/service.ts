@@ -118,7 +118,7 @@ export async function deleteStock(roomId: string, stockId: string) {
   session.startTransaction();
   try {
     await roomRepo.removeStockIdFromRoom(roomId, stockId);
-    const product = await stockRepo.deleteStock(stockID);
+    const product = await stockRepo.deleteStock(stockId);
     await session.commitTransaction();
     session.endSession();
     return { success: true, message: 'Stock delete successfully.', product };

@@ -19,6 +19,6 @@ export async function PATCH(request: Request) {
 export async function DELETE(request: Request) {
   const session = await request.json();
   const { roomId, stockId } = session;
-  await service.deleteStock(roomId, stockId);
-  return NextResponse.json(``);
+  const data = await service.deleteStock(roomId, stockId);
+  return NextResponse.json(data);
 }
