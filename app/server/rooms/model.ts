@@ -1,4 +1,4 @@
-import type { IRoom } from 'app/server/room/interfaces';
+import type { IRoom } from 'app/server/rooms/interfaces';
 import type { Model } from 'mongoose';
 import mongoose, { model } from 'mongoose';
 

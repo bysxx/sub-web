@@ -1,6 +1,6 @@
 import dbConnect from 'app/server/db-connect';
 
-import type { IStock } from './interfaces';
+import type { IStock, IStockLog } from './interfaces';
 import Stock from './model';
 
 // stock 데이터 받아서 추가하기.
@@ -20,7 +20,13 @@ export const getStock = async () => {
 // id로 특정 stock데이터 가져오기.
 export const findStockDetailById = async (id: string) => {
   await dbConnect();
-  return Stock.findOne({ _id: id });
+  try {
+    const data = await Stock.findOne({ _id: id });
+
+    return data;
+  } catch (error) {
+    throw new Error('Stock dose not exist');
+  }
 };
 
 export const updateStock = async (stockId: string, newStock: IStock) => {
@@ -33,42 +39,42 @@ export const updateStock = async (stockId: string, newStock: IStock) => {
 
     return updatedStock; // 업데이트된 주식 정보 반환
   } catch (error) {
-    throw new Error(`Stock update failed: ${error.message}`);
+    throw new Error('Stock update failed');
   }
 };
-
-// // 특정 stock의 Price값 업데이트
-// export const updateStock = async (stockId: string, newPrice: number) => {
-//   await dbConnect();
-//   const stock = await findStockDetailById(stockId);
-//   if (!stock) throw Error('Stock not found');
-//   const oldPrice = stock.price;
-//   const log: IStockLog = {
-//     price: newPrice,
-//     date: new Date(),
-//   };
-//   stock.price = newPrice;
-//   stock.logs.push(log);
-//   stock.rate = (newPrice - oldPrice) / oldPrice;
-//   await stock.save();
-// };
 
 // id에 해당하는 주식 삭제
 export const deleteStock = async (id: string) => {
   await dbConnect();
-  return Stock.findByIdAndDelete(id);
+  try {
+    const data = await Stock.findByIdAndDelete(id);
+
+    return data;
+  } catch (error) {
+    throw new Error('Stock delete failed');
+  }
 };
 
 // stock에 로그 추가
 export const addLogToStock = async (stockId: string, log: IStockLog) => {
   await dbConnect();
-  return Stock.findByIdAndUpdate(stockId, { $push: { logs: log } }, { new: true });
+  try {
+    const data = await Stock.findByIdAndUpdate(stockId, { $push: { logs: log } }, { new: true });
+
+    return data;
+  } catch (error) {
+    throw new Error('StockLog add failed');
+  }
 };
 
 // 특정 stock의 모든 로그 조회
 export const getLogByStock = async (stockId: string) => {
   await dbConnect();
-  const stock = await findStockDetailById(stockId);
-  if (!stock) throw Error('Stock not found');
-  return stock?.logs;
+  try {
+    const stock = await findStockDetailById(stockId);
+
+    return stock?.logs!;
+  } catch (error) {
+    throw new Error('StockLog find failed');
+  }
 };

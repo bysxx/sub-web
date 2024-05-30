@@ -1,6 +1,6 @@
+import type { ISetting } from 'app/server/rooms/interfaces';
 import { NextResponse } from 'next/server';
 
-import type { IRoom } from './interfaces';
 import * as service from './service';
 
 export async function GET(_: Request) {
@@ -11,14 +11,15 @@ export async function GET(_: Request) {
 
 export async function POST(request: Request) {
   const session = await request.json();
-  const roomSetting: Pick<IRoom, 'name' | 'setting'> = { name: session.name, setting: session.setting };
-  const data = await service.createRoom(roomSetting);
+  const name = session.name as string;
+  const setting = session.name as ISetting;
+  const data = await service.createRoom(name, setting);
   return NextResponse.json(data);
 }
 
 export async function DELETE(request: Request) {
   const session = await request.json();
-  const { roomId } = session;
+  const roomId = session.roomId as string;
   const data = await service.deleteRoom(roomId);
   return NextResponse.json(data);
 }

@@ -3,7 +3,7 @@ import { startSession } from 'mongoose';
 
 import * as roomRepo from '../rooms/repository';
 import * as stockRepo from '../stocks/repository';
-import type { IUser } from './interfaces';
+import type { IUser, IUserStockAsset } from './interfaces';
 import * as userRepo from './repository';
 
 export async function getUser() {
@@ -16,13 +16,14 @@ export async function getOneUser(userId: string) {
 
     return { success: true, message: 'user find successfully', product };
   } catch (error) {
-    return { success: false, message: error.message };
+    return { success: false, message: (error as Error).message };
   }
 }
 
 export async function getTotalBalanceByUser(userId: string) {
   try {
     const user = await userRepo.findUserDetailById(userId);
+    if (!user) throw new Error('User dose not exist');
 
     const stockValues = await Promise.all(
       user.stockAssets.map(async (asset) => {
@@ -36,15 +37,18 @@ export async function getTotalBalanceByUser(userId: string) {
 
     return { success: true, message: 'TotalBalance', product };
   } catch (error) {
-    return { success: false, message: error.message };
+    return { success: false, message: (error as Error).message };
   }
 }
 
 export async function getStockChipByUserAndStock(userId: string, stockId: string) {
   try {
     const user = await userRepo.findUserDetailById(userId);
+    if (!user) throw new Error('User dose not exist');
     const stock = await stockRepo.findStockDetailById(stockId);
+    if (!stock) throw new Error('Stock dose not exist');
     const stockAsset = user.stockAssets.find((asset) => asset.stockId === stockId);
+    if (!stockAsset) throw new Error('User stockAsset dose not exist');
     // 유저의 잔고와 주식 자산의 합계
     const Valuation = stockAsset.count * stockAsset.average;
     const ROI = (stock.price - stockAsset.average) / stockAsset.average;
@@ -58,7 +62,7 @@ export async function getStockChipByUserAndStock(userId: string, stockId: string
       },
     };
   } catch (error) {
-    return { success: false, message: error.message };
+    return { success: false, message: (error as Error).message };
   }
 }
 
@@ -68,11 +72,12 @@ export async function createUser(countryCode: number, nickname: string) {
   session.startTransaction();
   try {
     const room = await roomRepo.findRoomDetailByCountryCode(countryCode);
+    if (!room) throw new Error('Room dose not exist');
     const roomId = room._id.toString();
     const user: IUser = {
       nickname,
       roomId,
-      stockAsset: [],
+      stockAssets: [],
       balance: room.setting.startBalance,
     };
     const product = await userRepo.createUser(user);
@@ -83,18 +88,21 @@ export async function createUser(countryCode: number, nickname: string) {
   } catch (error) {
     await session.abortTransaction();
     session.endSession();
-    return { success: false, message: error.message };
+    return { success: false, message: (error as Error).message };
   }
 }
 
-export async function buyStock(userId: string, stockId: string, buyCount: string) {
+export async function buyStock(userId: string, stockId: string, buyCount: number) {
   await dbConnect();
   const session = await startSession();
   session.startTransaction();
   try {
     const user = await userRepo.findUserDetailById(userId);
-    const stockAsset = await userRepo.findStockAssetByUserIdAndStockId(userId, stockId);
+    if (!user) throw new Error('User dose not exist');
     const stock = await stockRepo.findStockDetailById(stockId);
+    if (!stock) throw new Error('Stock dose not exist');
+    const stockAsset = await userRepo.findStockAssetByUserIdAndStockId(userId, stockId);
+    if (!stockAsset) throw new Error('User stockAsset dose not exist');
     if (user.balance < stock.price * buyCount) throw new Error('too less balance');
     const newBalace = user.balance - stock.price * buyCount;
     if (!stockAsset) {
@@ -116,6 +124,9 @@ export async function buyStock(userId: string, stockId: string, buyCount: string
       await userRepo.updateStockAssetByUser(userId, stockId, newCount, newAverage);
     }
     const newUser: IUser = {
+      nickname: user.nickname,
+      roomId: user.roomId,
+      stockAssets: user.stockAssets,
       balance: newBalace,
     };
     const product = await userRepo.updateUser(userId, newUser);
@@ -125,30 +136,31 @@ export async function buyStock(userId: string, stockId: string, buyCount: string
   } catch (error) {
     await session.abortTransaction();
     session.endSession();
-    return { success: false, message: error.message };
+    return { success: false, message: (error as Error).message };
   }
 }
 
-export async function sellStock(userId: string, stockId: string, sellCount: string) {
+export async function sellStock(userId: string, stockId: string, sellCount: number) {
   await dbConnect();
   const session = await startSession();
   session.startTransaction();
   try {
     const user = await userRepo.findUserDetailById(userId);
-    const stockAsset = await userRepo.findStockAssetByUserIdAndStockId(userId, stockId);
+    if (!user) throw new Error('User dose not exist');
     const stock = await stockRepo.findStockDetailById(stockId);
     // 주식 자체가 없음.
-    if (!stock) {
-      throw new Error('stock not exist');
-    }
+    if (!stock) throw new Error('stock not exist');
+    const stockAsset = await userRepo.findStockAssetByUserIdAndStockId(userId, stockId);
     // 주식 보유하지 않음
-    if (!stockAsset) {
-      throw new Error('no have stock');
-    }
+    if (!stockAsset) throw new Error('no have stock');
+
     // 주식 이미 보유, 수량 감소
     if (stockAsset.count < sellCount) throw new Error('too less stock count');
     const newBalace = user.balance + stock.price * sellCount;
     const newUser: IUser = {
+      nickname: user.nickname,
+      roomId: user.roomId,
+      stockAssets: user.stockAssets,
       balance: newBalace,
     };
     const newCount = stockAsset.count - sellCount;
@@ -161,7 +173,7 @@ export async function sellStock(userId: string, stockId: string, sellCount: stri
   } catch (error) {
     await session.abortTransaction();
     session.endSession();
-    return { success: false, message: error.message };
+    return { success: false, message: (error as Error).message };
   }
 }
 
@@ -178,6 +190,6 @@ export async function deleteUser(roomId: string, userId: string) {
   } catch (error) {
     await session.abortTransaction();
     session.endSession();
-    return { success: false, message: error.message };
+    return { success: false, message: (error as Error).message };
   }
 }

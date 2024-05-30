@@ -1,4 +1,4 @@
-import type { IUser } from 'app/server/user/interfaces';
+import type { IUser } from 'app/server/users/interfaces';
 import type { Model } from 'mongoose';
 import mongoose, { model } from 'mongoose';
 

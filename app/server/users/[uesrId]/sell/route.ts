@@ -3,13 +3,14 @@ import { NextResponse } from 'next/server';
 import * as service from '../../service';
 
 export async function PATCH(request: Request) {
-  const url = new URL(request.url, `http://${request.headers.host}`);
+  const url = new URL(request.url);
   const { pathname } = url;
   const segments = pathname.split('/');
-  const userId = segments[3];
+  const userId = segments[3] as string;
 
   const session = await request.json();
-  const { stockId, sellCount } = session;
+  const stockId = session.stockId as string;
+  const sellCount = session.sellCount as number;
   const data = await service.sellStock(userId, stockId, sellCount);
   return NextResponse.json(data);
 }

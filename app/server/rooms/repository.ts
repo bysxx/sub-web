@@ -1,5 +1,5 @@
 import dbConnect from 'app/server/db-connect';
-import type { IHint, IRoom } from 'app/server/room/interfaces';
+import type { IHint, IRoom } from 'app/server/rooms/interfaces';
 
 import Room from './model';
 
@@ -53,7 +53,7 @@ export const getHintByRoom = async (roomId: string) => {
   await dbConnect();
   try {
     const room = await findRoomDetailById(roomId);
-    return room.hints;
+    return room?.hints!;
   } catch (error) {
     throw new Error('Room dose not exist');
   }
@@ -96,7 +96,7 @@ export const getStockIdByRoom = async (roomId: string) => {
   await dbConnect();
   try {
     const room = await findRoomDetailById(roomId);
-    return room.stockIds;
+    return room?.stockIds!;
   } catch (error) {
     throw new Error('Room dose not exist');
   }

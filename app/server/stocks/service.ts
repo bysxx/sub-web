@@ -2,8 +2,9 @@ import dbConnect from 'app/server/db-connect';
 import { startSession } from 'mongoose';
 
 import * as roomRepo from '../rooms/repository';
+import type { IUserStockAsset } from '../users/interfaces';
 import * as userRepo from '../users/repository';
-import type { IStock } from './interfaces';
+import type { IStock, IStockLog } from './interfaces';
 import * as stockRepo from './repository';
 
 export async function getStock() {
@@ -16,7 +17,7 @@ export async function getOneStock(stockId: string) {
 
     return { success: true, message: 'One stock find successfully', product };
   } catch (error) {
-    return { success: false, message: error.message };
+    return { success: false, message: (error as Error).message };
   }
 }
 
@@ -30,7 +31,7 @@ export async function getStockUserRank(roomId: string, stockId: string) {
     const users = await Promise.all(
       userIds.map(async (userId) => {
         const user = await userRepo.findUserDetailById(userId);
-        return user && user.stockAssets.some((asset) => asset.stockId === stockId) ? user : null;
+        return user && user.stockAssets.some((asset: IUserStockAsset) => asset.stockId === stockId) ? user : null;
       }),
     );
 
@@ -42,7 +43,7 @@ export async function getStockUserRank(roomId: string, stockId: string) {
   } catch (error) {
     await session.abortTransaction();
     session.endSession();
-    return { success: false, message: error.message };
+    return { success: false, message: (error as Error).message };
   }
 }
 
@@ -75,7 +76,7 @@ export async function createStock(
   } catch (error) {
     await session.abortTransaction();
     session.endSession();
-    return { success: false, message: error.message };
+    return { success: false, message: (error as Error).message };
   }
 }
 
@@ -87,13 +88,18 @@ export async function updateStockValue(stockId: string, newValue: number) {
   session.startTransaction();
   try {
     const stock = await stockRepo.findStockDetailById(stockId);
+    if (!stock) throw new Error('stock dose not exist');
     const oldValue = stock.value;
     const oldPrice = stock.price;
     const newPrice = oldPrice + oldPrice * ((newValue - oldValue) / (stock.valuePerRate * 100));
     const newStock: IStock = {
       price: newPrice,
+      name: stock.name,
+      description: stock.description,
       value: newValue,
       rate: (newValue - oldValue) / stock.valuePerRate,
+      valuePerRate: stock.valuePerRate,
+      logs: stock.logs,
     };
     await stockRepo.updateStock(stockId, newStock);
     const newLog: IStockLog = {
@@ -108,7 +114,7 @@ export async function updateStockValue(stockId: string, newValue: number) {
   } catch (error) {
     await session.abortTransaction();
     session.endSession();
-    return { success: false, message: error.message };
+    return { success: false, message: (error as Error).message };
   }
 }
 
@@ -125,6 +131,6 @@ export async function deleteStock(roomId: string, stockId: string) {
   } catch (error) {
     await session.abortTransaction();
     session.endSession();
-    return { success: false, message: error.message };
+    return { success: false, message: (error as Error).message };
   }
 }
