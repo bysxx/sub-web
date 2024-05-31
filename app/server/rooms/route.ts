@@ -12,7 +12,7 @@ export async function GET(_: Request) {
 export async function POST(request: Request) {
   const session = await request.json();
   const name = session.name as string;
-  const setting = session.name as ISetting;
+  const setting = session.setting as ISetting;
   const data = await service.createRoom(name, setting);
   return NextResponse.json(data);
 }
