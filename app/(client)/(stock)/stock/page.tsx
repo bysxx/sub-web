@@ -6,7 +6,7 @@ import { Stock } from './stock';
 export default function StockListPage() {
   return (
     <main className="flex min-h-screen w-full flex-col items-center p-8">
-      <div className="mt-8 w-full ">
+      <div className="mt-8 w-full">
         {/* Search Box */}
         <div className="relative min-w-47 rounded-[20px] bg-white p-2 shadow-xl">
           <div className="flex justify-between gap-2">
@@ -34,7 +34,7 @@ export default function StockListPage() {
               name={stock.name}
               price={stock.price}
               changeRate={stock.changeRate}
-              // imageUrl={stock.imageUrl}
+              imageURL={stock.imageURL}
             />
           ))}
         </div>

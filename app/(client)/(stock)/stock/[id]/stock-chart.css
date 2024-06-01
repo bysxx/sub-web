@@ -1,0 +1,10 @@
+/* Recharts에서 라인을 y축평행선 뒤로가게 하는 css */
+
+.line-chart .cartesian-grid {
+  z-index: 1;
+}
+
+.line-chart .line {
+  z-index: 2;
+  position: relative;
+}

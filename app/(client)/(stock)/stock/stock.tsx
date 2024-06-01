@@ -8,10 +8,10 @@ interface IStockProps {
   name: string;
   price: number;
   changeRate: number;
-  // imageUrl: string;
+  imageURL: string;
 }
 
-export function Stock({ id, name, price, changeRate }: IStockProps) {
+export function Stock({ id, name, price, changeRate, imageURL }: IStockProps) {
   const router = useRouter();
   const onClick = () => {
     router.push(`/stock/${id}`);
@@ -30,9 +30,7 @@ export function Stock({ id, name, price, changeRate }: IStockProps) {
       className="pointer-events-auto relative w-full min-w-47 rounded-[20px] bg-white p-3 shadow-lg"
     >
       <div className="pointer-events-auto flex items-center justify-start">
-        <div className="rounded-xl bg-secondary-y100 p-3">
-          <div className="size-4"></div>
-        </div>
+        <Image src={imageURL} alt="stock" width={40} height={40} />
         <div className="truncate pl-3 text-primary-d400">{name}</div>
         <div className="ml-auto flex items-center">
           <Image src={imageSrc} alt="chart" width={25} height={100} className="absolute left-3/4" />

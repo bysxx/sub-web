@@ -20,7 +20,7 @@ export default function StockContainer() {
             name={stock.name}
             price={stock.price}
             changeRate={stock.changeRate}
-            // imageUrl={stock.imageUrl}
+            imageURL={stock.imageURL}
           />
         ))}
       </ul>
