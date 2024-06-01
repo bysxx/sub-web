@@ -1,3 +1,4 @@
+import * as stockRepo from '../stocks/repository';
 import type { IHint, IRoom, ISetting } from './interfaces';
 import * as repo from './repository';
 
@@ -96,8 +97,10 @@ export async function dropUser(roomId: string, userId: string) {
 // 특정방에 존재하는 주식Id조회
 export async function getStock(roomId: string) {
   try {
-    const product = await repo.getStockIdByRoom(roomId);
-    return { success: true, message: 'Stock find successfully', product };
+    const stockIds = await repo.getStockIdByRoom(roomId);
+    const stocks = await stockRepo.getStockByIds(stockIds);
+
+    return { success: true, message: 'Stock find successfully', stocks };
   } catch (error) {
     return { success: false, message: (error as Error).message };
   }

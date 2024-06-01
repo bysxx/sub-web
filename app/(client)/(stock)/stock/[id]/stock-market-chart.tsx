@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import type { AxisDomainItem } from 'recharts/types/util/types';
 
 const data = [
   { date: '24', price: 300 },
@@ -10,7 +11,7 @@ const data = [
   { date: '27', price: 500 },
 ];
 
-const getYDomain = (pricelist) => {
+const getYDomain = (pricelist: any[]): [AxisDomainItem, AxisDomainItem] => {
   const prices = pricelist.map((d) => d.price);
   const min = Math.min(...prices);
   const max = Math.max(...prices);
@@ -22,6 +23,8 @@ const lastDataIndex = data.length - 1;
 const lastData = data[lastDataIndex];
 
 export default function MarketPriceChart() {
+  if (!lastData) return null;
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart

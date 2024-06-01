@@ -1,9 +1,21 @@
-import Link from 'next/link';
+'use client';
 
-import { stockdummys } from '../../../src/dummydata/stock-data';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+
 import StockCard from './stock-chip';
 
 export default function StockContainer() {
+  const [stocks, setStocks] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch('/server/rooms/665978306a8ce7a5b641241e/stocks')
+      .then((res) => res.json())
+      .then((data) => {
+        setStocks(data.stocks);
+      });
+  }, []);
+
   return (
     <div className="w-full">
       <div className="flex justify-between">
@@ -13,13 +25,13 @@ export default function StockContainer() {
         </Link>
       </div>
       <ul className="mt-4 flex w-full gap-3 overflow-scroll scrollbar-hide">
-        {stockdummys.map((stock) => (
+        {stocks.map((stock) => (
           <StockCard
-            key={stock.id}
-            id={stock.id}
+            key={stock._id}
+            id={stock._id}
             name={stock.name}
             price={stock.price}
-            changeRate={stock.changeRate}
+            changeRate={stock.rate}
             imageURL={stock.imageURL}
           />
         ))}

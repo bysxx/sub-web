@@ -2,11 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface IStockProps {
-  id: number;
+  id: string;
   name: string;
   price: number;
   changeRate: number;
-  imageUrl: string;
+  imageURL: string;
 }
 
 export default function StockCard({ id, name, price, changeRate, imageURL }: IStockProps) {

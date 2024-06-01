@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { rankdummys } from '../../../../../src/dummydata/rank-data';
 import RankList from './rank-list';
@@ -10,13 +10,16 @@ import MarketPriceChart from './stock-market-chart';
 import StandardPriceChart from './stock-standard-chart';
 
 export default function MarketPlacePage() {
-  const changeRate = 2.5;
-  let imageSrc = '/images/stock/List_C1_Graph.svg';
-  if (changeRate < 0) {
-    imageSrc = '/images/stock/List_C2_Graph.svg';
-  } else if (changeRate === 0) {
-    imageSrc = '/images/stock/List_C3_Graph.svg';
-  }
+  const [changeRate] = useState(0.5);
+  const imageSrc = useMemo(() => {
+    if (changeRate < 0) {
+      return '/images/stock/List_C2_Graph.svg';
+    }
+    if (changeRate === 0) {
+      return '/images/stock/List_C3_Graph.svg';
+    }
+    return '/images/stock/List_C1_Graph.svg';
+  }, [changeRate]);
 
   const [isMarketPriceChartVisible, setIsMarketPriceChartVisible] = useState(true);
 
@@ -85,7 +88,7 @@ export default function MarketPlacePage() {
             {rankdummys.map((rank) => (
               <RankList
                 key={rank.userid}
-                id={rank.userid}
+                userId={rank.userid}
                 username={rank.username}
                 rank={rank.rank}
                 howmuch={rank.howmuch}

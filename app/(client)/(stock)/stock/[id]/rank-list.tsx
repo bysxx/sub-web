@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 interface INewsProps {
-  userId: number;
+  userId: string;
   username: string;
   rank: number;
   howmuch: number;

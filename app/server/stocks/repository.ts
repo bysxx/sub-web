@@ -78,3 +78,10 @@ export const getLogByStock = async (stockId: string) => {
     throw new Error('StockLog find failed');
   }
 };
+
+export const getStockByIds = async (stockIds: string[]) => {
+  await dbConnect();
+  const stocks = await Stock.find({ _id: { $in: stockIds } });
+
+  return stocks;
+};
