@@ -39,6 +39,14 @@ export default function StockCard({ id, name, price, changeRate, imageURL }: ISt
   );
 }
 
-// export default function StockCard() {
-//   return <Stock id={stock.id} name={stock.name} price={stock.price} changeRate={stock.changeRate} />;
-// }
+export function LoadingStockCard() {
+  return (
+    <>
+      <li className="relative mb-10 h-[132px] min-w-47 animate-pulse rounded-[20px] bg-[#FF9508] p-4 shadow-lg"></li>
+      <li className="relative mb-10 h-[132px] min-w-47 animate-pulse rounded-[20px] bg-[#FF9508] p-4 shadow-lg"></li>
+      <li className="relative mb-10 h-[132px] min-w-47 animate-pulse rounded-[20px] bg-[#FF9508] p-4 shadow-lg"></li>
+      <li className="relative mb-10 h-[132px] min-w-47 animate-pulse rounded-[20px] bg-[#FF9508] p-4 shadow-lg"></li>
+      <li className="relative mb-10 h-[132px] min-w-47 animate-pulse rounded-[20px] bg-[#FF9508] p-4 shadow-lg"></li>
+    </>
+  );
+}

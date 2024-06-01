@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import StockCard from './stock-chip';
+import StockCard, { LoadingStockCard } from './stock-chip';
 
 export default function StockContainer() {
   const [stocks, setStocks] = useState<any[]>([]);
@@ -25,16 +25,20 @@ export default function StockContainer() {
         </Link>
       </div>
       <ul className="mt-4 flex w-full gap-3 overflow-scroll scrollbar-hide">
-        {stocks.map((stock) => (
-          <StockCard
-            key={stock._id}
-            id={stock._id}
-            name={stock.name}
-            price={stock.price}
-            changeRate={stock.rate}
-            imageURL={stock.imageURL}
-          />
-        ))}
+        {stocks.length > 0 ? (
+          stocks.map((stock) => (
+            <StockCard
+              key={stock._id}
+              id={stock._id}
+              name={stock.name}
+              price={stock.price}
+              changeRate={stock.rate}
+              imageURL={'/images/stock/Stock_Icon_Weight.svg'}
+            />
+          ))
+        ) : (
+          <LoadingStockCard />
+        )}
       </ul>
     </div>
   );

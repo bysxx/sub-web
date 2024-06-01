@@ -1,17 +1,29 @@
 'use client';
 
+import type { IStock } from 'app/server/stocks/interfaces';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { rankdummys } from '../../../../../src/dummydata/rank-data';
 import RankList from './rank-list';
 import MarketPriceChart from './stock-market-chart';
 import StandardPriceChart from './stock-standard-chart';
 
-export default function MarketPlacePage() {
-  const [changeRate] = useState(0.5);
+export default function MarketPlacePage({ params }: { params: { id: string } }) {
+  const [stock, setStock] = useState<IStock | null>(null);
+
+  useEffect(() => {
+    fetch(`/server/stocks/${params.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setStock(data.product);
+        console.log('[data.product]', data.product);
+      });
+  }, []);
+
   const imageSrc = useMemo(() => {
+    const changeRate = stock?.rate ?? 0;
     if (changeRate < 0) {
       return '/images/stock/List_C2_Graph.svg';
     }
@@ -19,7 +31,7 @@ export default function MarketPlacePage() {
       return '/images/stock/List_C3_Graph.svg';
     }
     return '/images/stock/List_C1_Graph.svg';
-  }, [changeRate]);
+  }, [stock]);
 
   const [isMarketPriceChartVisible, setIsMarketPriceChartVisible] = useState(true);
 
@@ -30,6 +42,8 @@ export default function MarketPlacePage() {
   const handleStandardPriceButtonClick = () => {
     setIsMarketPriceChartVisible(false);
   };
+
+  if (!stock) return null;
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center p-8">
@@ -46,9 +60,9 @@ export default function MarketPlacePage() {
           <Image src={imageSrc} alt="chart" width={16} height={100} />
           <div
             // eslint-disable-next-line no-nested-ternary
-            className={`${changeRate > 0 ? 'text-secondary-r100' : changeRate < 0 ? 'text-primary-b200' : 'text-secondary-d300'}`}
+            className={`${stock.rate > 0 ? 'text-secondary-r100' : stock.rate < 0 ? 'text-primary-b200' : 'text-secondary-d300'}`}
           >
-            {changeRate.toFixed(2)}%
+            {stock.rate.toFixed(2)}%
           </div>
         </div>
         <div className="my-6 grid grid-cols-2 gap-4 self-stretch text-center font-semibold">
