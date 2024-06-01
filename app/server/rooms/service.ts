@@ -1,4 +1,5 @@
 import * as stockRepo from '../stocks/repository';
+import * as userRepo from '../users/repository';
 import type { IHint, IRoom, ISetting } from './interfaces';
 import * as repo from './repository';
 
@@ -69,8 +70,9 @@ export async function dropHint(roomId: string, hintId: string) {
 // 특정방에 존재하는 유저 조회
 export async function getUser(roomId: string) {
   try {
-    const product = await repo.getUserIdByRoom(roomId);
-    return { success: true, message: 'User find successfully', product };
+    const userIds = await repo.getUserIdByRoom(roomId);
+		const users = await userRepo.getUserByIds(userIds);
+    return { success: true, message: 'User find successfully', users };
   } catch (error) {
     return { success: false, message: (error as Error).message };
   }

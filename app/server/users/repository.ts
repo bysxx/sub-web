@@ -15,6 +15,14 @@ export const getUser = async () => {
   return User.find({});
 };
 
+export const getUserByIds = async (userIds: string[]) => {
+  await dbConnect();
+  const users = await User.find({ _id: { $in: userIds } });
+
+  return users;
+};
+
+
 // id에 맞는 유저 조회
 export const findUserDetailById = async (id: string) => {
   await dbConnect();
