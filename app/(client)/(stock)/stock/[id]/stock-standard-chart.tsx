@@ -44,7 +44,7 @@ export default function StandardPriceChart() {
           dataKey="date"
           fontSize="10px"
           fontWeight="400"
-          tickFormatter={(value) => (value === lastData.date ? '오늘' : value)}
+          tickFormatter={(value) => (value === lastData.date ? '오늘' : `${value}일`)}
           stroke="#596874"
           tickLine={false}
           tick={{ fill: '#596874' }}
