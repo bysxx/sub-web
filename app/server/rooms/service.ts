@@ -71,7 +71,7 @@ export async function dropHint(roomId: string, hintId: string) {
 export async function getUser(roomId: string) {
   try {
     const userIds = await repo.getUserIdByRoom(roomId);
-		const users = await userRepo.getUserByIds(userIds);
+    const users = await userRepo.getUserByIds(userIds);
     return { success: true, message: 'User find successfully', users };
   } catch (error) {
     return { success: false, message: (error as Error).message };

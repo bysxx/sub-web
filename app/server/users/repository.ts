@@ -22,7 +22,6 @@ export const getUserByIds = async (userIds: string[]) => {
   return users;
 };
 
-
 // id에 맞는 유저 조회
 export const findUserDetailById = async (id: string) => {
   await dbConnect();
