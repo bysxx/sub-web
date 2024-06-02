@@ -2,16 +2,16 @@
 
 import type { IStock } from 'app/server/stocks/interfaces';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 
-import { rankdummys } from '../../../../../src/dummydata/rank-data';
-import RankList from './rank-list';
+import RankListBox from './rank-list-box';
 import MarketPriceChart from './stock-market-chart';
 import StandardPriceChart from './stock-standard-chart';
 
 export default function MarketPlacePage({ params }: { params: { id: string } }) {
   const [stock, setStock] = useState<IStock | null>(null);
+  // const [changeRate] = useState(0.5);
+  const [isRankListBoxExpanded, setIsRankListBoxExpanded] = useState(false);
 
   useEffect(() => {
     fetch(`/server/stocks/${params.id}`)
@@ -43,6 +43,10 @@ export default function MarketPlacePage({ params }: { params: { id: string } }) 
     setIsMarketPriceChartVisible(false);
   };
 
+  const handleRankListBoxToggle = () => {
+    setIsRankListBoxExpanded((prev) => !prev);
+  };
+
   if (!stock) return null;
 
   return (
@@ -66,10 +70,23 @@ export default function MarketPlacePage({ params }: { params: { id: string } }) 
           </div>
         </div>
         <div className="my-6 grid grid-cols-2 gap-4 self-stretch text-center font-semibold">
-          <button className="rounded-full bg-primary-b200 px-12 py-2 text-white">매수하기</button>
-          <button className="rounded-full bg-[#ECF0F3] px-12 py-2 text-primary-d400">매도하기</button>
+          <button
+            className="rounded-full bg-primary-b200 px-12 py-2 text-white"
+            // eslint-disable-next-line no-return-assign
+            onClick={() => (window.location.href = '/stock/3/buy')}
+          >
+            매수하기
+          </button>
+          <button
+            className="rounded-full bg-[#ECF0F3] px-12 py-2 text-primary-d400"
+            // eslint-disable-next-line no-return-assign
+            onClick={() => (window.location.href = '/stock/3/sell')}
+          >
+            매도하기
+          </button>
         </div>
-        <div className="rounded-[28px] border border-[#ECF0F3] p-4 pb-6">
+        {/* 그래프 박스 컴포넌트 */}
+        <div className="relative rounded-[28px] border border-[#ECF0F3] p-4 pb-6">
           <div className="mb-4 flex justify-end gap-2">
             <button
               className={`rounded-l-full px-2.5 py-1 text-[12px] ${isMarketPriceChartVisible ? 'bg-primary-b200 text-white' : 'bg-secondary-d100 text-secondary-d300'}`}
@@ -88,28 +105,8 @@ export default function MarketPlacePage({ params }: { params: { id: string } }) 
             {isMarketPriceChartVisible ? <MarketPriceChart /> : <StandardPriceChart />}
           </div>
         </div>
-        <div className="mt-6 rounded-[28px] border border-[#ECF0F3] px-4 pb-6 pt-1 shadow-md">
-          <Link href={`/stock/1/rank`}>
-            <button className="flex w-full justify-center py-3">
-              <Image src="/images/icon/Stock_C1_Button_Expand.svg" alt="news-expand" width={50} height={100} />
-            </button>
-          </Link>
-          <h1 className="mb-2 text-[20px] font-bold text-primary-d400">실시간 현황</h1>
-          <ul
-            role="list"
-            className="flex max-h-[200px] w-full flex-col divide-y divide-[#D0DCE5] overflow-y-auto scrollbar-hide"
-          >
-            {rankdummys.map((rank) => (
-              <RankList
-                key={rank.userid}
-                userId={rank.userid}
-                username={rank.username}
-                rank={rank.rank}
-                howmuch={rank.howmuch}
-              />
-            ))}
-          </ul>
-        </div>
+
+        <RankListBox isExpanded={isRankListBoxExpanded} onToggleExpand={handleRankListBoxToggle} />
       </div>
     </main>
   );
