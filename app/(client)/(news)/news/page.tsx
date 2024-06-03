@@ -1,4 +1,5 @@
 import NewsList from 'app/(client)/(main)/news-list';
+import Navigation from 'app/(client)/navigation';
 import Link from 'next/link';
 
 import { newsdummys } from '../../../../src/dummydata/news-data';
@@ -25,6 +26,7 @@ export default function NewsListPage() {
             />
           ))}
         </ul>
+        <Navigation />
       </div>
     </main>
   );

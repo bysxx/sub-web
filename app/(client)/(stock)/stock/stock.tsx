@@ -8,15 +8,23 @@ export interface IStockProps {
   name: string;
   price: number;
   changeRate: number;
-  imageURL: string;
 }
 
-export function Stock({ id, name, price, changeRate, imageURL }: IStockProps) {
-  let imageSrc = '/images/stock/List_C1_Graph.svg';
+export function Stock({ id, name, price, changeRate }: IStockProps) {
+  let changeArrow = '/images/stock/List_C1_Graph.svg';
   if (changeRate < 0) {
-    imageSrc = '/images/stock/List_C2_Graph.svg';
+    changeArrow = '/images/stock/List_C2_Graph.svg';
   } else if (changeRate === 0) {
-    imageSrc = '/images/stock/List_C3_Graph.svg';
+    changeArrow = '/images/stock/List_C3_Graph.svg';
+  }
+
+  let imageURL = '/images/stock/Stock_Icon_Weight.svg';
+  if (id === '66597aa3bdc5679131ec8d55') {
+    imageURL = '/images/stock/Stock_Icon_Socks.svg';
+  } else if (id === '66597ab9bdc5679131ec8d59') {
+    imageURL = '/images/stock/Stock_Icon_Homework.svg';
+  } else if (id === '66597af1bdc5679131ec8d5d') {
+    imageURL = '/images/stock/Stock_Icon_Late.svg';
   }
 
   return (
@@ -26,7 +34,7 @@ export function Stock({ id, name, price, changeRate, imageURL }: IStockProps) {
           <Image src={imageURL} alt="stock" width={40} height={40} />
           <div className="truncate pl-3 text-primary-d400">{name}</div>
           <div className="ml-auto flex items-center">
-            <Image src={imageSrc} alt="chart" width={25} height={100} className="absolute left-3/4" />
+            <Image src={changeArrow} alt="chart" width={25} height={100} className="absolute left-3/4" />
             <div>
               <div className="text-right text-[15px]">{price.toLocaleString('ko-KR')} 서브</div>
               <div

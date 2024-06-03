@@ -5,7 +5,7 @@ export default function StartPage() {
   return (
     <div className="min-h-screen w-full">
       <div className="flex flex-col items-center">
-        <div className="pb-34 flex flex-col items-center pt-40 ">
+        <div className="flex flex-col items-center pb-[136px] pt-40 ">
           <Image src="/logo.svg" alt="logo" width={160} height={160} />
           <div className="text-[32px] font-bold">SUB</div>
         </div>

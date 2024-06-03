@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
+import Navigation from '../../navigation';
 import { Stock } from './stock';
 
 export default function StockListPage() {
@@ -39,16 +40,10 @@ export default function StockListPage() {
         {/* Stock List */}
         <div className="mt-12 grid grid-rows-1 gap-4">
           {stocks.map((stock) => (
-            <Stock
-              key={stock._id}
-              id={stock._id}
-              name={stock.name}
-              price={stock.price}
-              changeRate={stock.rate}
-              imageURL={'/images/stock/Stock_Icon_Weight.svg'}
-            />
+            <Stock key={stock._id} id={stock._id} name={stock.name} price={stock.price} changeRate={stock.rate} />
           ))}
         </div>
+        <Navigation />
       </div>
     </main>
   );

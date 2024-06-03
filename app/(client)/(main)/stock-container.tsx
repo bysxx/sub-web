@@ -27,14 +27,7 @@ export default function StockContainer() {
       <ul className="mt-4 flex w-full gap-3 overflow-scroll scrollbar-hide">
         {stocks.length > 0 ? (
           stocks.map((stock) => (
-            <StockCard
-              key={stock._id}
-              id={stock._id}
-              name={stock.name}
-              price={stock.price}
-              changeRate={stock.rate}
-              imageURL={'/images/stock/Stock_Icon_Weight.svg'}
-            />
+            <StockCard key={stock._id} id={stock._id} name={stock.name} price={stock.price} changeRate={stock.rate} />
           ))
         ) : (
           <LoadingStockCard />

@@ -6,29 +6,39 @@ export interface IStockProps {
   name: string;
   price: number;
   changeRate: number;
-  imageURL: string;
 }
 
-export default function StockCard({ id, name, price, changeRate, imageURL }: IStockProps) {
-  let changeStyle;
+export default function StockCard({ id, name, price, changeRate }: IStockProps) {
+  let changeArrow;
   if (changeRate > 0) {
-    changeStyle = { bg: 'bg-secondary-r100', src: '/images/icon/icon_arrow_up.svg', alt: 'stock-up' };
+    changeArrow = { bg: 'bg-secondary-r100', src: '/images/icon/icon_arrow_up.svg', alt: 'stock-up' };
   } else if (changeRate < 0) {
-    changeStyle = { bg: 'bg-primary-b200', src: '/images/icon/icon_arrow_down.svg', alt: 'stock-down' };
+    changeArrow = { bg: 'bg-primary-b200', src: '/images/icon/icon_arrow_down.svg', alt: 'stock-down' };
   } else {
-    changeStyle = { bg: 'bg-secondary-d300', src: '/images/icon/icon-arrow-nochange.svg', alt: 'stock-nochange' };
+    changeArrow = { bg: 'bg-secondary-d300', src: '/images/icon/icon-arrow-nochange.svg', alt: 'stock-nochange' };
+  }
+
+  let changeStyle;
+  if (id === '66597aa3bdc5679131ec8d55') {
+    changeStyle = { imageURL: '/images/stock/Stock_Icon_Socks.svg', bg: 'bg-[#53CC5F]/20' };
+  } else if (id === '66597ab9bdc5679131ec8d59') {
+    changeStyle = { imageURL: '/images/stock/Stock_Icon_Homework.svg', bg: 'bg-[#BCD8FF]/20' };
+  } else if (id === '66597af1bdc5679131ec8d5d') {
+    changeStyle = { imageURL: '/images/stock/Stock_Icon_Late.svg', bg: 'bg-[#002448]/20' };
+  } else {
+    changeStyle = { imageURL: '/images/stock/Stock_Icon_Weight.svg', bg: 'bg-[#FF9508]/20' };
   }
 
   return (
     <Link href={`/stock/${id}`}>
       {/* `/stock/${News_C1_Button_Expandid}` */}
-      <li className="relative mb-10 min-w-47 rounded-[20px] bg-[#FF9508]/20 p-4 shadow-lg">
-        <div className={`absolute right-4 top-4 flex rounded-xl ${changeStyle.bg} px-2 py-1 text-[10px] text-white`}>
-          <Image src={changeStyle.src} alt={changeStyle.alt} width={10} height={10} className="mr-1" />
+      <li className={`relative mb-10 min-w-47 rounded-[20px] ${changeStyle.bg} p-4 shadow-lg`}>
+        <div className={`absolute right-4 top-4 flex rounded-xl ${changeArrow.bg} px-2 py-1 text-[10px] text-white`}>
+          <Image src={changeArrow.src} alt={changeArrow.alt} width={10} height={10} className="mr-1" />
           {changeRate.toFixed(2)}%
         </div>
         <div className="flex justify-start">
-          <Image src={imageURL} alt="stock" width={48} height={48} />
+          <Image src={changeStyle.imageURL} alt="stock" width={48} height={48} />
         </div>
         <div className="mt-2 text-[12px] font-semibold text-secondary-d300">{name}</div>
         <div className="mt-1 align-bottom text-[20px] font-semibold text-secondary-d400">

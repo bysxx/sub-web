@@ -74,10 +74,10 @@ export default function RankListBox({ stockId, roomId, isExpanded, onToggleExpan
       .then((data) => {
         if (data.success) {
           setRankData(data.product);
-          console.log('rankdata: ', data);
         }
       })
       .catch((error) => {
+        // eslint-disable-next-line no-console
         console.error('Error fetching user rank data:', error);
       });
   }, [stockId, roomId]);
