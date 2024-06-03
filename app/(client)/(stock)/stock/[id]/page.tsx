@@ -5,12 +5,12 @@ import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 
 import RankListBox from './rank-list-box';
-import MarketPriceChart from './stock-market-chart';
-import StandardPriceChart from './stock-standard-chart';
+// import MarketPriceChart from './stock-market-chart';
+// import StandardPriceChart from './stock-standard-chart';
 
 export default function MarketPlacePage({ params }: { params: { id: string } }) {
   const [stock, setStock] = useState<IStock | null>(null);
-  // const [changeRate] = useState(0.5);
+  const roomId = '6656d87bfdadd7535652e8a7';
   const [isRankListBoxExpanded, setIsRankListBoxExpanded] = useState(false);
 
   useEffect(() => {
@@ -18,6 +18,7 @@ export default function MarketPlacePage({ params }: { params: { id: string } }) 
       .then((res) => res.json())
       .then((data) => {
         setStock(data.product);
+        // eslint-disable-next-line no-console
         console.log('[data.product]', data.product);
       });
   }, []);
@@ -33,15 +34,15 @@ export default function MarketPlacePage({ params }: { params: { id: string } }) 
     return '/images/stock/List_C1_Graph.svg';
   }, [stock]);
 
-  const [isMarketPriceChartVisible, setIsMarketPriceChartVisible] = useState(true);
+  // const [isMarketPriceChartVisible, setIsMarketPriceChartVisible] = useState(true);
 
-  const handleMarketPriceButtonClick = () => {
-    setIsMarketPriceChartVisible(true);
-  };
+  // const handleMarketPriceButtonClick = () => {
+  //   setIsMarketPriceChartVisible(true);
+  // };
 
-  const handleStandardPriceButtonClick = () => {
-    setIsMarketPriceChartVisible(false);
-  };
+  // const handleStandardPriceButtonClick = () => {
+  //   setIsMarketPriceChartVisible(false);
+  // };
 
   const handleRankListBoxToggle = () => {
     setIsRankListBoxExpanded((prev) => !prev);
@@ -54,10 +55,10 @@ export default function MarketPlacePage({ params }: { params: { id: string } }) 
       <div className="mt-8 w-full">
         <div className="mb-12 flex gap-2">
           <Image src="/images/stock/Stock_Icon_Weight.svg" alt="stock" width={16} height={16} />
-          <div>선생님 몸무게</div>
+          <div>{stock.name}</div>
         </div>
         <div className="flex items-end justify-center font-bold text-secondary-d400">
-          <div className="text-[32px] leading-none">500</div>
+          <div className="text-[32px] leading-none">{stock.price}</div>
           <div className="ml-2 text-[24px] leading-none"> 서브</div>
         </div>
         <div className="mt-3 flex justify-center gap-1">
@@ -73,20 +74,20 @@ export default function MarketPlacePage({ params }: { params: { id: string } }) 
           <button
             className="rounded-full bg-primary-b200 px-12 py-2 text-white"
             // eslint-disable-next-line no-return-assign
-            onClick={() => (window.location.href = '/stock/3/buy')}
+            onClick={() => (window.location.href = `/stock/${params.id}/buy`)}
           >
             매수하기
           </button>
           <button
             className="rounded-full bg-[#ECF0F3] px-12 py-2 text-primary-d400"
             // eslint-disable-next-line no-return-assign
-            onClick={() => (window.location.href = '/stock/3/sell')}
+            onClick={() => (window.location.href = `/stock/${params.id}/sell`)}
           >
             매도하기
           </button>
         </div>
         {/* 그래프 박스 컴포넌트 */}
-        <div className="relative rounded-[28px] border border-[#ECF0F3] p-4 pb-6">
+        {/* <div className="relative rounded-[28px] border border-[#ECF0F3] p-4 pb-6">
           <div className="mb-4 flex justify-end gap-2">
             <button
               className={`rounded-l-full px-2.5 py-1 text-[12px] ${isMarketPriceChartVisible ? 'bg-primary-b200 text-white' : 'bg-secondary-d100 text-secondary-d300'}`}
@@ -104,9 +105,14 @@ export default function MarketPlacePage({ params }: { params: { id: string } }) 
           <div className="w-full" style={{ width: '100%', height: 200 }}>
             {isMarketPriceChartVisible ? <MarketPriceChart /> : <StandardPriceChart />}
           </div>
-        </div>
+        </div> */}
 
-        <RankListBox isExpanded={isRankListBoxExpanded} onToggleExpand={handleRankListBoxToggle} />
+        <RankListBox
+          stockId={params.id}
+          roomId={roomId}
+          isExpanded={isRankListBoxExpanded}
+          onToggleExpand={handleRankListBoxToggle}
+        />
       </div>
     </main>
   );

@@ -6,7 +6,7 @@ import { useState } from 'react';
 export default function StockSellPage() {
   const [inputValue, setInputValue] = useState('0');
 
-  const handleButtonClick = (value) => {
+  const handleButtonClick = (value: any) => {
     if (value === 'back') {
       setInputValue(inputValue.slice(0, -1) || '0');
     } else {
@@ -38,7 +38,7 @@ export default function StockSellPage() {
           <span className="text-[16px] font-semibold"> 주</span>
         </div>
         <div className="mb-12 text-left align-bottom font-semibold text-primary-b200">
-          {inputValue * 500}
+          {Number(inputValue) * 500}
           <span className="text-[12px] font-medium"> 서브</span>
         </div>
         <div className="grid grid-cols-3 gap-2">

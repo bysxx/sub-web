@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface IStockProps {
+export interface IStockProps {
   id: string;
   name: string;
   price: number;
@@ -21,6 +21,7 @@ export default function StockCard({ id, name, price, changeRate, imageURL }: ISt
 
   return (
     <Link href={`/stock/${id}`}>
+      {/* `/stock/${News_C1_Button_Expandid}` */}
       <li className="relative mb-10 min-w-47 rounded-[20px] bg-[#FF9508]/20 p-4 shadow-lg">
         <div className={`absolute right-4 top-4 flex rounded-xl ${changeStyle.bg} px-2 py-1 text-[10px] text-white`}>
           <Image src={changeStyle.src} alt={changeStyle.alt} width={10} height={10} className="mr-1" />

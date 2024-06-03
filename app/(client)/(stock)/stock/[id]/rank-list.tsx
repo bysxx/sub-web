@@ -1,13 +1,12 @@
 import Image from 'next/image';
 
 interface IRankProps {
-  userId: string;
   username: string;
   rank: number;
   howmuch: number;
 }
 
-export default function RankList({ userId, username, rank, howmuch }: IRankProps) {
+export default function RankList({ username, rank, howmuch }: IRankProps) {
   const profileImgSrc =
     username === '선생님' ? '/images/icon/Icon-Profile-teacher.svg' : '/images/icon/Icon-Profile-student.svg';
 
@@ -21,9 +20,7 @@ export default function RankList({ userId, username, rank, howmuch }: IRankProps
           </div>
         </div>
         <div className="min-w-0 flex-auto">
-          <p className="truncate text-sm font-semibold leading-7 text-gray-900">
-            {username}_{userId}
-          </p>
+          <p className="truncate text-sm font-semibold leading-7 text-gray-900">{username}</p>
           <p className="line-clamp-2 text-xs leading-4 text-gray-500">{howmuch.toLocaleString('ko-KR')} 서브</p>
         </div>
       </div>

@@ -1,9 +1,20 @@
-import Image from 'next/image';
+'use client';
 
-import { stockdummys } from '../../../../src/dummydata/stock-data';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+
 import { Stock } from './stock';
 
 export default function StockListPage() {
+  const [stocks, setStocks] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch('/server/rooms/665978306a8ce7a5b641241e/stocks')
+      .then((res) => res.json())
+      .then((data) => {
+        setStocks(data.stocks);
+      });
+  }, []);
   return (
     <main className="flex min-h-screen w-full flex-col items-center p-8">
       <div className="mt-8 w-full">
@@ -27,14 +38,14 @@ export default function StockListPage() {
         </div>
         {/* Stock List */}
         <div className="mt-12 grid grid-rows-1 gap-4">
-          {stockdummys.map((stock) => (
+          {stocks.map((stock) => (
             <Stock
-              key={stock.id}
-              id={stock.id}
+              key={stock._id}
+              id={stock._id}
               name={stock.name}
               price={stock.price}
-              changeRate={stock.changeRate}
-              imageURL={stock.imageURL}
+              changeRate={stock.rate}
+              imageURL={'/images/stock/Stock_Icon_Weight.svg'}
             />
           ))}
         </div>

@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface INewsProps {
-  id: number;
+export interface INewsProps {
+  id: string;
   title: string;
   description: string;
   writer: string;
-  time: string;
+  time: string /* 백엔드에서 안옴 */;
 }
 
 export default function NewsList({ id, title, description, writer, time }: INewsProps) {
