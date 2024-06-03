@@ -62,6 +62,7 @@ export const addStockAssetToUser = async (userId: string, stockAsset: IUserStock
   await dbConnect();
   try {
     const data = await User.findByIdAndUpdate(userId, { $push: { stockAssets: stockAsset } }, { new: true });
+    if (!data) throw new Error('User stockAsset add failed');
     return data;
   } catch (error) {
     throw new Error('User stockAsset add failed');
@@ -106,6 +107,7 @@ export const updateStockAssetByUser = async (userId: string, stockId: string, ne
       { new: true },
     );
 
+    if (!data) throw new Error('User stockAsset update failed');
     return data;
   } catch (error) {
     throw new Error('User stockAsset update failed');

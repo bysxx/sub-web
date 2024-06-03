@@ -2,6 +2,7 @@ import dbConnect from 'app/server/db-connect';
 import { startSession } from 'mongoose';
 
 import * as roomRepo from '../rooms/repository';
+import type { IUserStockAsset } from '../users/interfaces';
 import * as userRepo from '../users/repository';
 import type { IStock, IStockLog } from './interfaces';
 import * as stockRepo from './repository';
