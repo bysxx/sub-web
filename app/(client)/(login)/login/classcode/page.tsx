@@ -6,22 +6,21 @@ import { useState } from 'react';
 
 export default function UsernamePage() {
   const [username, setUsername] = useState('');
-
   const isButtonDisabled = username.trim().length < 1;
 
   return (
     <div className="min-h-screen w-full p-8">
       <div className="flex flex-col items-center">
-        <div className="mb-34 mt-32 flex flex-col items-center">
+        <div className="mb-[136px] mt-32 flex flex-col items-center">
           <Image src="/logo.svg" alt="logo" width={80} height={80} />
           <div className="mt-5 text-[20px] font-bold">반가워요, 투자자님!</div>
         </div>
-        <div className="h-13 b-3 relative mb-6 mt-14 flex w-4/5 gap-2 rounded-[20px] bg-[#ECF0F3] p-3 shadow-xl">
+        <div className="relative mb-6 mt-14 flex h-[52px] w-4/5 gap-2 rounded-[20px] bg-[#ECF0F3] p-3 shadow-xl">
           <input
             type="text"
             required
             placeholder="국가코드 입력"
-            className="required:color-red-500 w-full bg-transparent text-secondary-d300 focus:outline-0"
+            className="w-full bg-transparent text-secondary-d300 required:border-secondary-r100 focus:outline-0"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
