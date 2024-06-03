@@ -2,7 +2,6 @@ import dbConnect from 'app/server/db-connect';
 import { startSession } from 'mongoose';
 
 import * as roomRepo from '../rooms/repository';
-import type { IUserStockAsset } from '../users/interfaces';
 import * as userRepo from '../users/repository';
 import type { IStock, IStockLog } from './interfaces';
 import * as stockRepo from './repository';
@@ -31,7 +30,19 @@ export async function getStockUserRank(roomId: string, stockId: string) {
     const users = await Promise.all(
       userIds.map(async (userId) => {
         const user = await userRepo.findUserDetailById(userId);
-        return user && user.stockAssets.some((asset: IUserStockAsset) => asset.stockId === stockId) ? user : null;
+        if (user) {
+          const filteredAssets = user.stockAssets.filter((asset: IUserStockAsset) => asset.stockId === stockId);
+          if (filteredAssets.length > 0) {
+            return {
+              _id: user._id,
+              nickname: user.nickname,
+              roomId: user.roomId,
+              balance: user.balance,
+              stockAssets: filteredAssets,
+            };
+          }
+        }
+        return null;
       }),
     );
 
