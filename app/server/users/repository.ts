@@ -62,7 +62,6 @@ export const addStockAssetToUser = async (userId: string, stockAsset: IUserStock
   await dbConnect();
   try {
     const data = await User.findByIdAndUpdate(userId, { $push: { stockAssets: stockAsset } }, { new: true });
-
     return data;
   } catch (error) {
     throw new Error('User stockAsset add failed');
@@ -85,8 +84,7 @@ export const findStockAssetByUserIdAndStockId = async (userId: string, stockId: 
   await dbConnect();
   try {
     const user = await User.findOne({ _id: userId, 'stockAssets.stockId': stockId }, { 'stockAssets.$': 1 });
-    if (!user) throw new Error('User dose not exist');
-    if (!user.stockAssets) return null;
+    if (!user || !user.stockAssets) return null;
     return user.stockAssets[0];
   } catch (error) {
     throw new Error((error as Error).message);

@@ -2,6 +2,11 @@ import { NextResponse } from 'next/server';
 
 import * as service from './service';
 
+export async function GET(_: Request) {
+  const data = await service.getUser();
+  return NextResponse.json(data);
+}
+
 export async function POST(request: Request) {
   const session = await request.json();
   const { countryCode, nickname } = session;

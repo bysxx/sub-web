@@ -7,7 +7,13 @@ import type { IUser, IUserStockAsset } from './interfaces';
 import * as userRepo from './repository';
 
 export async function getUser() {
-  return userRepo.getUser();
+  try {
+    const product = await userRepo.getUser();
+
+    return { success: true, message: 'user find successfully', product };
+  } catch (error) {
+    return { success: false, message: (error as Error).message };
+  }
 }
 
 export async function getOneUser(userId: string) {
@@ -101,32 +107,28 @@ export async function buyStock(userId: string, stockId: string, buyCount: number
     if (!user) throw new Error('User dose not exist');
     const stock = await stockRepo.findStockDetailById(stockId);
     if (!stock) throw new Error('Stock dose not exist');
-    const stockAsset = await userRepo.findStockAssetByUserIdAndStockId(userId, stockId);
-    if (!stockAsset) throw new Error('User stockAsset dose not exist');
     if (user.balance < stock.price * buyCount) throw new Error('too less balance');
-    const newBalace = user.balance - stock.price * buyCount;
+
+    const stockAsset = await userRepo.findStockAssetByUserIdAndStockId(userId, stockId);
+    let updatedStockAsset;
     if (!stockAsset) {
       const newStockAsset: IUserStockAsset = {
         stockId,
-        count: 0,
-        average: 0,
+        count: buyCount,
+        average: stock.price,
       };
-      await userRepo.addStockAssetToUser(userId, newStockAsset);
-    }
-    if (!stockAsset) {
-      const newCount = buyCount;
-      const newAverage = stock.price;
-      await userRepo.updateStockAssetByUser(userId, stockId, newCount, newAverage);
+      updatedStockAsset = await userRepo.addStockAssetToUser(userId, newStockAsset);
     } else {
       const newCount = stockAsset.count + buyCount;
       const newAverage =
         (stockAsset.average * stockAsset.count + stock.price * buyCount) / (stockAsset.count + buyCount);
-      await userRepo.updateStockAssetByUser(userId, stockId, newCount, newAverage);
+      updatedStockAsset = await userRepo.updateStockAssetByUser(userId, stockId, newCount, newAverage);
     }
+    const newBalace = user.balance - stock.price * buyCount;
     const newUser: IUser = {
       nickname: user.nickname,
       roomId: user.roomId,
-      stockAssets: user.stockAssets,
+      stockAssets: updatedStockAsset.stockAssets,
       balance: newBalace,
     };
     const product = await userRepo.updateUser(userId, newUser);
@@ -156,16 +158,17 @@ export async function sellStock(userId: string, stockId: string, sellCount: numb
 
     // 주식 이미 보유, 수량 감소
     if (stockAsset.count < sellCount) throw new Error('too less stock count');
+    const newCount = stockAsset.count - sellCount;
+    const newAverage = stockAsset.average;
+    const updatedStockAsset = await userRepo.updateStockAssetByUser(userId, stockId, newCount, newAverage);
+
     const newBalace = user.balance + stock.price * sellCount;
     const newUser: IUser = {
       nickname: user.nickname,
       roomId: user.roomId,
-      stockAssets: user.stockAssets,
+      stockAssets: updatedStockAsset.stockAssets,
       balance: newBalace,
     };
-    const newCount = stockAsset.count - sellCount;
-    const newAverage = stockAsset.average;
-    await userRepo.updateStockAssetByUser(userId, stockId, newCount, newAverage);
     const product = await userRepo.updateUser(userId, newUser);
     await session.commitTransaction();
     session.endSession();
