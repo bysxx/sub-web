@@ -1,10 +1,30 @@
+'use client';
+
 import NewsList from 'app/(client)/(main)/news-list';
 import Navigation from 'app/(client)/navigation';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-import { newsdummys } from '../../../../src/dummydata/news-data';
+import type { INewsProps } from '../../(main)/news-list';
 
 export default function NewsListPage() {
+  const [newsData, setNewsData] = useState<INewsProps[]>([]);
+
+  useEffect(() => {
+    fetch(`/server/rooms/665978306a8ce7a5b641241e/hints`)
+      // fetch(`/server/rooms/${roomId}/hints`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setNewsData(data.product);
+        }
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.error('Error fetching user rank data:', error);
+      });
+  }, []);
+
   return (
     <main className="flex min-h-screen w-full flex-col items-center p-8">
       <div className="mb-4 w-full pt-8 ">
@@ -15,14 +35,20 @@ export default function NewsListPage() {
           </Link>
         </div>
         <ul role="list" className="flex w-full flex-col divide-y divide-[#D0DCE5] overflow-x-hidden scrollbar-hide">
-          {newsdummys.map((news) => (
+          {newsData.map((news) => (
             <NewsList
-              key={news.id}
-              id={news.id}
+              key={news._id}
+              _id={news._id}
               title={news.title}
               description={news.description}
-              writer={news.writer}
-              time={news.time}
+              userId={news.userId || '선생님'}
+              date={new Date(news.date).toLocaleString('ko-KR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
             />
           ))}
         </ul>
