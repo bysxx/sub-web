@@ -45,7 +45,13 @@ export const deleteRoom = async (id: string) => {
 // roomId에 해당하는 방에 hint생성
 export const addHintToRoom = async (roomId: string, hint: IHint) => {
   await dbConnect();
-  return Room.findByIdAndUpdate(roomId, { $push: { hints: hint } }, { new: true });
+  try {
+    const data = await Room.findByIdAndUpdate(roomId, { $push: { hints: hint } }, { new: true });
+
+    return data;
+  } catch (error) {
+    throw new Error('hint data dose not exist');
+  }
 };
 
 // roomId에 해당하는 방의 hint 반환

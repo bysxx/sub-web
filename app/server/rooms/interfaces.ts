@@ -2,6 +2,7 @@ export interface IHint {
   userId: string;
   title: string;
   description: string;
+  date: Date;
 }
 
 export interface ISetting {

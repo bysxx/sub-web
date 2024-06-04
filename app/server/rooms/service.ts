@@ -46,10 +46,14 @@ export async function getHint(roomId: string) {
 
 export async function addHint(roomId: string, userId: string, title: string, description: string) {
   try {
+    if (!userId) throw new Error('uesrId is required');
+    if (!title) throw new Error('title is required');
+    if (!description) throw new Error('description is required');
     const hint: IHint = {
       userId,
       title,
       description,
+      date: new Date(),
     };
     const product = await repo.addHintToRoom(roomId, hint);
     return { success: true, message: 'Hint added successfully', product };

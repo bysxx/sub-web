@@ -6,6 +6,7 @@ const hintSchema = new mongoose.Schema({
   userId: { type: String, required: true },
   title: { type: String, required: true },
   description: { type: String, required: true },
+  date: { type: Date, required: true, expires: 86400 },
 });
 
 const settingSchema = new mongoose.Schema({
