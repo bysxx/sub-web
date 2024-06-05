@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import type { AxisDomainItem } from 'recharts/types/util/types';
 
 interface Log {
@@ -12,6 +12,24 @@ interface Product {
   price: number;
   logs: Log[];
 }
+
+interface CustomTooltipProps {
+  active: boolean;
+  payload: any[];
+  label: string;
+}
+
+const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
+  if (active && payload && payload.length && label !== '0') {
+    return (
+      <div className="rounded-md bg-white p-2 text-[12px] font-semibold text-primary-b200 opacity-80">
+        <p>{`${payload[0].value}서브`}</p>
+      </div>
+    );
+  }
+
+  return null;
+};
 
 const fetchStockData = async (stockId: any): Promise<Product> => {
   const response = await fetch(`/server/stocks/${stockId}`);
@@ -41,11 +59,11 @@ const processChartData = (product: Product) => {
     };
   });
 
-  data.unshift({
-    // 오늘 데이터 추가
-    date: today.getDate().toString(),
-    price: product.price,
-  });
+  // data.unshift({
+  //   // 오늘 데이터 추가
+  //   date: today.getDate().toString(),
+  //   price: product.price,
+  // });
 
   while (data.length < 4) {
     // 최대 4일치 데이터로 제한
@@ -97,6 +115,7 @@ const MarketPriceChart = ({ stockId }: { stockId: any }) => {
           padding={{ left: 30, right: 30 }}
         />
         <YAxis domain={getYDomain(data)} fontSize="10px" fontWeight="400" tickLine={false} axisLine={false} />
+        <Tooltip content={<CustomTooltip active={true} payload={[]} label="" />} />
         <Line
           type="linear"
           dataKey="price"
