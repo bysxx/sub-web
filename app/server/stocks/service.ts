@@ -49,9 +49,15 @@ export async function getStockUserRank(roomId: string, stockId: string) {
 
     const product = users.filter((user) => user !== null);
 
+    const sortedProduct = product.sort((a, b) => {
+      const aCount = a?.stockAssets[0]?.count ?? 0;
+      const bCount = b?.stockAssets[0]?.count ?? 0;
+      return bCount - aCount;
+    });
+
     await session.commitTransaction();
     session.endSession();
-    return { success: true, message: 'User rank find successfully', product };
+    return { success: true, message: 'User rank find successfully', product: sortedProduct };
   } catch (error) {
     await session.abortTransaction();
     session.endSession();
