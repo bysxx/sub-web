@@ -66,7 +66,7 @@ export default function StockSellPage({ params }: { params: { id: string } }) {
       },
       body: JSON.stringify({
         stockId: params.id,
-        buyCount: Number(inputValue),
+        sellCount: Number(inputValue),
       }),
     });
 
