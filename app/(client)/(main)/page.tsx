@@ -22,7 +22,6 @@ export default function MainPage() {
       .then((data) => {
         if (data.success) {
           setNewsData(data.product);
-          console.log(data.product);
         }
       })
       .catch((error) => {
