@@ -1,7 +1,6 @@
 import '@styles/global.css';
 
 import Navigation from './navigation';
-import { Providers } from './provider';
 
 export const metadata = {
   title: 'SUB',
@@ -12,10 +11,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <body>
-        <Providers>
-          <div className="mx-auto max-w-xl leading-tight shadow-md">{children}</div>
-          <Navigation />
-        </Providers>
+        <div className="mx-auto max-w-xl leading-tight shadow-md">{children}</div>
+        <Navigation />
       </body>
     </html>
   );

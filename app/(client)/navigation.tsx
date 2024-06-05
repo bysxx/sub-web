@@ -3,7 +3,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+const DISABLE_PATH = ['/chat', '/login'];
+
 export default function Navigation() {
+  const path = window.location.pathname;
+  if (DISABLE_PATH.includes(path)) return null;
+
   return (
     <nav className="fixed bottom-10 left-1/2 z-30 flex h-16 w-[346px] -translate-x-1/2 justify-evenly rounded-[20px] bg-gradient-to-b from-transparent to-white px-2 align-middle shadow-xl backdrop-blur-sm">
       <div className="bg-transparent"></div>
