@@ -14,8 +14,8 @@ export interface INewsProps {
 export default function NewsList({ _id, title, description, userId, date }: INewsProps) {
   const userData = useUserData(userId);
   const profileImgSrc =
-    userId === '선생님' ? '/images/icon/Icon-Profile-teacher.svg' : '/images/icon/Icon-Profile-student.svg';
-  const userNickname = userId === '선생님' ? '선생님' : userData?.nickname || '게스트';
+    userId === 'adminId' ? '/images/icon/Icon-Profile-teacher.svg' : '/images/icon/Icon-Profile-student.svg';
+  const userNickname = userId === 'adminId' ? '선생님' : userData?.nickname || '게스트';
   const timeOnly = date.slice(-8);
 
   return (

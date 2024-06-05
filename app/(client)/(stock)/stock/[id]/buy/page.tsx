@@ -93,7 +93,7 @@ export default function StockBuyPage({ params }: { params: { id: string } }) {
       </div>
       <div className="mt-5 w-full rounded-b rounded-t-[28px] border border-secondary-d200 bg-white p-11">
         <div className="mb-2 text-left text-[12px] text-secondary-d300">몇 주 매수할까요?</div>
-        <div className="mb-2 text-left align-bottom text-[24px] font-bold text-secondary-d300">
+        <div className="mb-2 truncate text-left align-bottom text-[24px] font-bold text-secondary-d300">
           {inputValue}
           <span className="text-[16px] font-semibold"> 주</span>
         </div>
