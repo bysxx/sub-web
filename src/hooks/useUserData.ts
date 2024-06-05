@@ -1,7 +1,8 @@
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 interface UserData {
-  userId: string;
+  _id: string;
   nickname: string;
   roomId: string;
   balance: number;
@@ -13,10 +14,15 @@ interface UserData {
   }[];
 }
 
-export const useUserData = (userId: string) => {
+const DEFAULT_USERID = '665fe166d061b2718711f064';
+
+export const useUserData = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
+    const userId = localStorage.getItem('userId') || DEFAULT_USERID;
+
     fetch(`/server/users/${userId}`)
       .then((res) => res.json())
       .then((data) => {
@@ -25,10 +31,11 @@ export const useUserData = (userId: string) => {
         }
       })
       .catch((error) => {
+        router.push('/login');
         // eslint-disable-next-line no-console
         console.error('Error fetching user data:', error);
       });
-  }, [userId]);
+  }, []);
 
   return userData;
 };

@@ -11,8 +11,7 @@ export default function StockBuyPage({ params }: { params: { id: string } }) {
   const [inputValue, setInputValue] = useState('0');
   const [stock, setStock] = useState<IStock | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const userId = '665fe166d061b2718711f064';
-  const userData = useUserData(userId);
+  const userData = useUserData();
 
   useEffect(() => {
     fetch(`/server/stocks/${params.id}`)
@@ -59,7 +58,9 @@ export default function StockBuyPage({ params }: { params: { id: string } }) {
   };
 
   const handleModalConfirm = () => {
-    fetch(`/server/users/${userId}/buy`, {
+    if (!userData) return;
+
+    fetch(`/server/users/${userData._id}/buy`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

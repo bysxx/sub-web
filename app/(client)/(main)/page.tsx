@@ -11,8 +11,7 @@ import NewsList from './news-list';
 import StockContainer from './stock-container';
 
 export default function MainPage() {
-  const userId = '665fe166d061b2718711f064';
-  const userData = useUserData(userId);
+  const userData = useUserData();
   const [newsData, setNewsData] = useState<INewsProps[]>([]);
 
   useEffect(() => {

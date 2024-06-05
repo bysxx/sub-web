@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-const DISABLE_PATH = ['/chat', '/login'];
+const DISABLE_PATH = ['/chat', '/login', '/login/username', '/login/ready', '/login/classcode'];
 
 export default function Navigation() {
   const path = usePathname();
