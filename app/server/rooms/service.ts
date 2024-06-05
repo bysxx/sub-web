@@ -37,7 +37,26 @@ export async function deleteRoom(roomId: string) {
 // 특정방에 존재하는 힌트 조회
 export async function getHint(roomId: string) {
   try {
-    const product = await repo.getHintByRoom(roomId);
+    const hints = await repo.getHintByRoom(roomId);
+
+    const product = await Promise.all(
+      hints.map(async (hint) => {
+        if (hint.userId === 'adminId') {
+          return {
+            hint,
+            nickname: '선생님',
+          };
+        }
+        const user = await userRepo.findUserDetailById(hint.userId);
+        if (!user) throw new Error('user dose not exist');
+        return {
+          hint,
+          nickname: user.nickname,
+        };
+      }),
+    );
+
+    // console.log(product);
     return { success: true, message: 'Hint find successfully', product };
   } catch (error) {
     return { success: false, message: (error as Error).message };
