@@ -33,6 +33,18 @@ export const findUserDetailById = async (id: string) => {
   }
 };
 
+// id에 맞는 유저 조회
+export const findUserDetailBynickname = async (nickname: string) => {
+  await dbConnect();
+  try {
+    const data = await User.findOne({ nickname });
+
+    return data;
+  } catch (error) {
+    throw new Error('user dose not exist');
+  }
+};
+
 // 유저 데이터 업데이트
 export const updateUser = async (userId: string, newUser: IUser) => {
   await dbConnect();

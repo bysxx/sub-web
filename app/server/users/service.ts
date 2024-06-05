@@ -77,16 +77,22 @@ export async function createUser(countryCode: number, nickname: string) {
   const session = await startSession();
   session.startTransaction();
   try {
+    const user = await userRepo.findUserDetailBynickname(nickname);
     const room = await roomRepo.findRoomDetailByCountryCode(countryCode);
     if (!room) throw new Error('Room dose not exist');
     const roomId = room._id.toString();
-    const user: IUser = {
+    if (user && user.roomId === roomId) {
+      await session.commitTransaction();
+      session.endSession();
+      return { success: true, message: 'User already exists', product: user };
+    }
+    const newUser: IUser = {
       nickname,
       roomId,
       stockAssets: [],
       balance: room.setting.startBalance,
     };
-    const product = await userRepo.createUser(user);
+    const product = await userRepo.createUser(newUser);
     await roomRepo.addUserIdToRoom(roomId, product._id.toString());
     await session.commitTransaction();
     session.endSession();
