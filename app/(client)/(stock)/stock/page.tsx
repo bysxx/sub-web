@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-import Navigation from '../../navigation';
 import { Stock } from './stock';
 
 export default function StockListPage() {
@@ -43,7 +42,6 @@ export default function StockListPage() {
             <Stock key={stock._id} id={stock._id} name={stock.name} price={stock.price} changeRate={stock.rate} />
           ))}
         </div>
-        <Navigation />
       </div>
     </main>
   );

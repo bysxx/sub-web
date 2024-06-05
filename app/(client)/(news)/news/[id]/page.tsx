@@ -3,7 +3,6 @@
 'use client';
 
 import NewsList from 'app/(client)/(main)/news-list';
-import Navigation from 'app/(client)/navigation';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -58,7 +57,6 @@ export default function NewsListPage() {
               />
             ))}
         </ul>
-        <Navigation />
       </div>
     </main>
   );

@@ -4,7 +4,6 @@ import type { IStock } from 'app/server/stocks/interfaces';
 import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 
-import Navigation from '../../../navigation';
 import RankListBox from './rank-list-box';
 import MarketPriceChart from './stock-market-chart';
 import StandardPriceChart from './stock-standard-chart';
@@ -133,7 +132,6 @@ export default function MarketPlacePage({ params }: { params: { id: string } }) 
           isExpanded={isRankListBoxExpanded}
           onToggleExpand={handleRankListBoxToggle}
         />
-        <Navigation />
       </div>
     </main>
   );

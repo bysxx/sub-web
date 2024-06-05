@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 
 import { useUserData } from '../../../../../../src/hooks/useUserData';
-import Navigation from '../../../../navigation';
 import Modal from '../../modal';
 
 export default function StockBuyPage({ params }: { params: { id: string } }) {
@@ -139,7 +138,6 @@ export default function StockBuyPage({ params }: { params: { id: string } }) {
           매수하기
         </button>
       </div>
-      <Navigation />
       <Modal
         isOpen={isModalOpen}
         onClose={handleModalClose}

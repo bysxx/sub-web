@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 
 import Header from '../../../src/components/ui/header';
 import { useUserData } from '../../../src/hooks/useUserData';
-import Navigation from '../navigation';
 import type { INewsProps } from './news-list';
 import NewsList from './news-list';
 import StockContainer from './stock-container';
@@ -74,7 +73,6 @@ export default function MainPage() {
               />
             ))}
         </ul>
-        <Navigation />
       </div>
     </main>
   );
