@@ -11,7 +11,7 @@ export default function StockBuyPage({ params }: { params: { id: string } }) {
   const [inputValue, setInputValue] = useState('0');
   const [stock, setStock] = useState<IStock | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const userId = '66597985bdc5679131ec8d40';
+  const userId = '665fe166d061b2718711f064';
   const userData = useUserData(userId);
 
   useEffect(() => {
@@ -59,6 +59,17 @@ export default function StockBuyPage({ params }: { params: { id: string } }) {
   };
 
   const handleModalConfirm = () => {
+    fetch(`/server/users/${userId}/buy`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        stockId: params.id,
+        buyCount: Number(inputValue),
+      }),
+    });
+
     // 매수 확정
     setIsModalOpen(false);
     setInputValue('0');
@@ -128,7 +139,7 @@ export default function StockBuyPage({ params }: { params: { id: string } }) {
       </div>
       <div className="mt-2 flex w-full justify-center">
         <button
-          className={`w-full rounded-b-[20px] rounded-t bg-primary-b200 px-40 py-3 text-[18px] font-semibold text-white ${
+          className={`w-full break-keep rounded-b-[20px] rounded-t bg-primary-b200 px-40 py-3 text-[18px] font-semibold text-white ${
             inputValue === '0' || (userData && Number(inputValue) > userData.balance)
               ? 'cursor-not-allowed bg-secondary-d100 text-primary-d400'
               : ''
