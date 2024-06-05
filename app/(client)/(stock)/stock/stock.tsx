@@ -19,11 +19,11 @@ export function Stock({ id, name, price, changeRate }: IStockProps) {
   }
 
   let imageURL = '/images/stock/Stock_Icon_Weight.svg';
-  if (id === '66597aa3bdc5679131ec8d55') {
+  if (id === '665fe28bd061b2718711f07f') {
     imageURL = '/images/stock/Stock_Icon_Socks.svg';
-  } else if (id === '66597ab9bdc5679131ec8d59') {
+  } else if (id === '665fe2acd061b2718711f083') {
     imageURL = '/images/stock/Stock_Icon_Homework.svg';
-  } else if (id === '66597af1bdc5679131ec8d5d') {
+  } else if (id === '665fe2cad061b2718711f087') {
     imageURL = '/images/stock/Stock_Icon_Late.svg';
   }
 

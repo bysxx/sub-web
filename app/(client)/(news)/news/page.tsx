@@ -11,7 +11,7 @@ export default function NewsListPage() {
   const [newsData, setNewsData] = useState<INewsProps[]>([]);
 
   useEffect(() => {
-    fetch(`/server/rooms/665978306a8ce7a5b641241e/hints`)
+    fetch(`/server/rooms/665fe129d061b2718711f05a/hints`)
       // fetch(`/server/rooms/${roomId}/hints`)
       .then((res) => res.json())
       .then((data) => {
@@ -34,23 +34,27 @@ export default function NewsListPage() {
             <button className="text-[14px] text-primary-b200">소식 쓰기</button>
           </Link>
         </div>
-        <ul role="list" className="flex w-full flex-col divide-y divide-[#D0DCE5] overflow-x-hidden scrollbar-hide">
-          {newsData.map((news) => (
-            <NewsList
-              key={news._id}
-              _id={news._id}
-              title={news.title}
-              description={news.description}
-              userId={news.userId || '선생님'}
-              date={new Date(news.date).toLocaleString('ko-KR', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-              })}
-            />
-          ))}
+        <ul
+          role="list"
+          className="flex w-full flex-col divide-y divide-secondary-d200 overflow-x-hidden scrollbar-hide"
+        >
+          {newsData &&
+            newsData.map((news) => (
+              <NewsList
+                key={news._id}
+                _id={news._id}
+                title={news.title}
+                description={news.description}
+                userId={news.userId || '선생님'}
+                date={new Date(news.date).toLocaleString('ko-KR', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}
+              />
+            ))}
         </ul>
         <Navigation />
       </div>

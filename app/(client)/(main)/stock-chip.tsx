@@ -19,11 +19,11 @@ export default function StockCard({ id, name, price, changeRate }: IStockProps) 
   }
 
   let changeStyle;
-  if (id === '66597aa3bdc5679131ec8d55') {
+  if (id === '665fe28bd061b2718711f07f') {
     changeStyle = { imageURL: '/images/stock/Stock_Icon_Socks.svg', bg: 'bg-[#53CC5F]/20' };
-  } else if (id === '66597ab9bdc5679131ec8d59') {
+  } else if (id === '665fe2acd061b2718711f083') {
     changeStyle = { imageURL: '/images/stock/Stock_Icon_Homework.svg', bg: 'bg-[#BCD8FF]/20' };
-  } else if (id === '66597af1bdc5679131ec8d5d') {
+  } else if (id === '665fe2cad061b2718711f087') {
     changeStyle = { imageURL: '/images/stock/Stock_Icon_Late.svg', bg: 'bg-[#002448]/20' };
   } else {
     changeStyle = { imageURL: '/images/stock/Stock_Icon_Weight.svg', bg: 'bg-[#FF9508]/20' };

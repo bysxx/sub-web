@@ -15,8 +15,8 @@ export default function NewsList({ _id, title, description, userId, date }: INew
   const userData = useUserData(userId);
   const profileImgSrc =
     userId === '선생님' ? '/images/icon/Icon-Profile-teacher.svg' : '/images/icon/Icon-Profile-student.svg';
-
   const userNickname = userId === '선생님' ? '선생님' : userData?.nickname || '게스트';
+  const timeOnly = date.slice(-8);
 
   return (
     <Link href={`/news/${_id}`}>
@@ -26,7 +26,7 @@ export default function NewsList({ _id, title, description, userId, date }: INew
             <p className="truncate text-sm font-semibold leading-7 text-gray-900">{title}</p>
             <p className="line-clamp-2 text-xs leading-4 text-gray-500">{description}</p>
             <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-              {date} | {userNickname}
+              {timeOnly} | {userNickname}
             </p>
           </div>
         </div>

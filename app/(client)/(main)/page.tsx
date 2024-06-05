@@ -17,12 +17,13 @@ export default function MainPage() {
   const [newsData, setNewsData] = useState<INewsProps[]>([]);
 
   useEffect(() => {
-    fetch(`/server/rooms/665978306a8ce7a5b641241e/hints`)
+    fetch(`/server/rooms/665fe129d061b2718711f05a/hints`)
       // fetch(`/server/rooms/${roomId}/hints`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
           setNewsData(data.product);
+          console.log(data.product);
         }
       })
       .catch((error) => {
@@ -53,24 +54,25 @@ export default function MainPage() {
         </Link>
         <ul
           role="list"
-          className="flex max-h-64 w-full flex-col divide-y divide-[#D0DCE5] overflow-y-auto scrollbar-hide"
+          className="flex max-h-64 w-full flex-col divide-y divide-secondary-d200 overflow-y-auto scrollbar-hide"
         >
-          {newsData.map((news) => (
-            <NewsList
-              key={news._id}
-              _id={news._id}
-              title={news.title}
-              description={news.description}
-              userId={news.userId || '선생님'}
-              date={new Date(news.date).toLocaleString('ko-KR', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-              })}
-            />
-          ))}
+          {newsData &&
+            newsData.map((news) => (
+              <NewsList
+                key={news._id}
+                _id={news._id}
+                title={news.title}
+                description={news.description}
+                userId={news.userId || '선생님'}
+                date={new Date(news.date).toLocaleString('ko-KR', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}
+              />
+            ))}
         </ul>
         <Navigation />
       </div>
