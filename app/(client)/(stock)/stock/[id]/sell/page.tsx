@@ -67,8 +67,8 @@ export default function StockSellPage({ params }: { params: { id: string } }) {
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center p-8">
-      <div className="mt-8 w-full">
-        <div className="mb-12 flex gap-2">
+      <div className="mt-4 w-full">
+        <div className="mb-9 flex gap-2">
           <Image src={imageURL} alt="stock" width={16} height={16} />
           <div>{stock ? stock.name : 'Loading...'}</div>
         </div>
@@ -92,8 +92,8 @@ export default function StockSellPage({ params }: { params: { id: string } }) {
           </div>
         </div>
       </div>
-      <div className="mt-4 w-full rounded-b rounded-t-[28px] border border-secondary-d200 bg-white p-12">
-        <div className="mb-2 text-left text-[12px] text-secondary-d300">몇 주 매수할까요?</div>
+      <div className="mt-5 w-full rounded-b rounded-t-[28px] border border-secondary-d200 bg-white p-11">
+        <div className="mb-2 text-left text-[12px] text-secondary-d300">몇 주 매도할까요?</div>
         <div className="mb-2 text-left align-bottom text-[24px] font-bold text-secondary-d300">
           {inputValue}
           <span className="text-[16px] font-semibold"> 주</span>
@@ -127,9 +127,9 @@ export default function StockSellPage({ params }: { params: { id: string } }) {
           </button>
         </div>
       </div>
-      <div className="mt-3 flex w-full justify-center">
+      <div className="mt-2 flex w-full justify-center">
         <button
-          className={`w-full rounded-b-[20px] rounded-t bg-primary-b200 px-40 py-4 text-[20px] font-semibold text-white ${
+          className={`w-full rounded-b-[20px] rounded-t bg-primary-b200 px-40 py-3 text-[18px] font-semibold text-white ${
             inputValue === '0' || (userData && Number(inputValue) > userData.balance)
               ? 'cursor-not-allowed bg-secondary-d100 text-primary-d400'
               : ''
