@@ -1,35 +1,3 @@
-// import React from 'react';
-
-// interface ModalProps {
-//   isOpen: boolean;
-//   onClose: () => void;
-//   onConfirm: () => void;
-// }
-
-// const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onConfirm }) => {
-//   if (!isOpen) return null;
-
-//   return (
-//     // eslint-disable-next-line tailwindcss/migration-from-tailwind-2
-//     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-//       <div className="rounded bg-white p-6 shadow-lg">
-//         <h2 className="mb-4 text-lg font-bold">매수하기</h2>
-//         <p className="mb-6">매수할까요?</p>
-//         <div className="flex flex-row justify-items-stretch">
-//           <button className="rounded bg-secondary-r100 text-white" onClick={onClose}>
-//             안할래요
-//           </button>
-//           <button className="rounded bg-[#53CC5F] text-white" onClick={onConfirm}>
-//             좋아요
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Modal;
-// /components/Modal.tsx
 import React from 'react';
 
 interface ModalProps {
