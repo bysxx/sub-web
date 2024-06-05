@@ -44,7 +44,7 @@ export default function RankListBox({ stockId, roomId, isExpanded, onToggleExpan
     <div
       // eslint-disable-next-line tailwindcss/enforces-negative-arbitrary-values
       className={`mt-6 rounded-[28px] border border-[#ECF0F3] px-4 pb-6 pt-1 shadow-md transition-all duration-300 ${
-        isExpanded ? 'relative -mt-[17.5rem] max-h-[450px] bg-white opacity-95' : 'max-h-[150px]'
+        isExpanded ? 'relative -mt-[17.5rem] mb-16 max-h-[450px] bg-white opacity-95' : 'max-h-[150px]'
       }`}
       style={{ overflow: isExpanded ? 'visible' : 'hidden' }}
     >

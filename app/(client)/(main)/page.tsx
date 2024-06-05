@@ -16,7 +16,6 @@ export default function MainPage() {
 
   useEffect(() => {
     fetch(`/server/rooms/665fe129d061b2718711f05a/hints`)
-      // fetch(`/server/rooms/${roomId}/hints`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -54,22 +53,7 @@ export default function MainPage() {
           className="flex max-h-64 w-full flex-col divide-y divide-secondary-d200 overflow-y-auto scrollbar-hide"
         >
           {newsData &&
-            newsData.map((news) => (
-              <NewsList
-                key={news._id}
-                _id={news._id}
-                title={news.title}
-                description={news.description}
-                userId={news.userId || '선생님'}
-                date={new Date(news.date).toLocaleString('ko-KR', {
-                  year: 'numeric',
-                  month: '2-digit',
-                  day: '2-digit',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })}
-              />
-            ))}
+            newsData.map((news) => <NewsList key={news.hint._id} nickname={news.nickname} hint={news.hint} />)}
         </ul>
       </div>
     </main>

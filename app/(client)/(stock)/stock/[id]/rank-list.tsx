@@ -21,7 +21,7 @@ export default function RankList({ username, rank, howmuch }: IRankProps) {
         </div>
         <div className="min-w-0 flex-auto">
           <p className="truncate text-sm font-semibold leading-7 text-gray-900">{username}</p>
-          <p className="line-clamp-2 text-xs leading-4 text-gray-500">{howmuch.toLocaleString('ko-KR')} 서브</p>
+          <p className="line-clamp-2 text-xs leading-4 text-gray-500">{howmuch.toLocaleString('ko-KR')} 주</p>
         </div>
       </div>
     </li>
