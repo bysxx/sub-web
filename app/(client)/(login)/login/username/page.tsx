@@ -1,12 +1,27 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function UsernamePage() {
   const [username, setUsername] = useState('');
   const isButtonDisabled = username.trim().length < 2;
+  const router = useRouter();
+
+  const handleLogin = async () => {
+    const userData = await fetch('/server/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ nickname: username, countryCode: '123' }),
+    }).then((res) => res.json());
+
+    window.localStorage.setItem('userId', userData.product._id);
+
+    router.push('/');
+  };
 
   return (
     <div className="min-h-screen w-full p-8">
@@ -30,9 +45,9 @@ export default function UsernamePage() {
           {isButtonDisabled ? (
             <Image src="/images/icon/Boot_Button01.svg" alt="next" width={80} height={80} />
           ) : (
-            <Link href="/login/ready">
+            <button onClick={handleLogin}>
               <Image src="/images/icon/Boot_Button01.svg" alt="next" width={80} height={80} />
-            </Link>
+            </button>
           )}
         </button>
       </div>
