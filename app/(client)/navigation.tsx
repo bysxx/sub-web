@@ -2,11 +2,12 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const DISABLE_PATH = ['/chat', '/login'];
 
 export default function Navigation() {
-  const path = window.location.pathname;
+  const path = usePathname();
   if (DISABLE_PATH.includes(path)) return null;
 
   return (
