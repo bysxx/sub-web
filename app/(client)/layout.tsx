@@ -3,8 +3,8 @@ import '@styles/global.css';
 import Navigation from './navigation';
 
 export const metadata = {
-  title: 'SUB',
-  description: '어린이 모의투자 서비스',
+  title: '어린이 모의투자 플랫폼​ - SUB',
+  description: '생성형 AI를 활용한 어린이 모의투자 플랫폼​',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
