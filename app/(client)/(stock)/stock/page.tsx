@@ -22,7 +22,7 @@ export default function StockListPage() {
         <div className="relative min-w-47 rounded-[20px] bg-white p-2 shadow-xl">
           <div className="flex justify-between gap-2">
             <div className="flex w-full gap-2 rounded-xl bg-[#ECF0F3] p-3">
-              <Image src="/images/icon/icon-search.svg" alt="search" width={12} height={12} className="opacity-50" />
+              <Image src="/images/icon/Icon-search.svg" alt="search" width={12} height={12} className="opacity-50" />
               <input
                 type="text"
                 placeholder="종목 검색"
