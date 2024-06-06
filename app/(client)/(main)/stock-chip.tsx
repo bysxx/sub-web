@@ -42,7 +42,7 @@ export default function StockCard({ id, name, price, changeRate }: IStockProps) 
         </div>
         <div className="mt-2 text-[12px] font-semibold text-secondary-d300">{name}</div>
         <div className="mt-1 align-bottom text-[20px] font-semibold text-secondary-d400">
-          {price.toLocaleString('ko-KR')}
+          {Math.round(price).toLocaleString('ko-KR')}
           <span className="text-[12px]"> 서브</span>
         </div>
       </li>

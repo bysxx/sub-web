@@ -83,7 +83,7 @@ export default function StockSellPage({ params }: { params: { id: string } }) {
           <div>{stock ? stock.name : 'Loading...'}</div>
         </div>
         <div className="flex items-end justify-center font-bold text-secondary-d400">
-          <div className="text-[32px] leading-none">{stock ? stock.price : '0'}</div>
+          <div className="text-[32px] leading-none">{Math.round(stock ? stock.price : 0)}</div>
           <div className="ml-2 text-[24px] leading-none"> 서브</div>
         </div>
         <div className="mt-3 flex justify-center gap-1 text-red-500">

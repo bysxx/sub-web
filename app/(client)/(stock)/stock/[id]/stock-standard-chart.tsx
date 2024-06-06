@@ -29,7 +29,7 @@ const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
   if (active && payload && payload.length && label !== '0') {
     return (
       <div className="rounded-md bg-white p-2 text-[12px] font-semibold text-secondary-y100 opacity-80">
-        <p>{`${payload[0].value}서브`}</p>
+        <p>{`${Math.round(payload[0].value)}서브`}</p>
       </div>
     );
   }

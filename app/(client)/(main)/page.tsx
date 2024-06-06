@@ -35,7 +35,7 @@ export default function MainPage() {
         <div className="relative my-7 min-w-47 rounded-[20px] bg-primary-b200 p-4 text-white">
           <div className="mt-2 text-[16px]">나의 자산</div>
           <div className="mt-1 align-bottom text-[32px] font-bold">
-            {userData && userData.balance ? userData.balance.toLocaleString('ko-KR') : '0'}
+            {Math.round(userData && userData.balance ? userData.balance : 0).toLocaleString('ko-KR')}
             <span className="text-[22px]"> 서브</span>
           </div>
         </div>

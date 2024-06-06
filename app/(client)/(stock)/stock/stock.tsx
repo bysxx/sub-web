@@ -36,7 +36,7 @@ export function Stock({ id, name, price, changeRate }: IStockProps) {
           <div className="ml-auto flex items-center">
             <Image src={changeArrow} alt="chart" width={25} height={100} className="absolute left-3/4" />
             <div>
-              <div className="text-right text-[15px]">{price.toLocaleString('ko-KR')} 서브</div>
+              <div className="text-right text-[15px]">{Math.round(price).toLocaleString('ko-KR')} 서브</div>
               <div
                 // eslint-disable-next-line no-nested-ternary
                 className={`text-right text-[12px] ${changeRate > 0 ? 'text-secondary-r100' : changeRate < 0 ? 'text-primary-b200' : 'text-secondary-d300'}`}

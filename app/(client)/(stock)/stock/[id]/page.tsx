@@ -67,7 +67,7 @@ export default function MarketPlacePage({ params }: { params: { id: string } }) 
           <div>{stock.name}</div>
         </div>
         <div className="flex items-end justify-center font-bold text-secondary-d400">
-          <div className="text-[32px] leading-none">{stock.price}</div>
+          <div className="text-[32px] leading-none">{Math.round(stock.price)}</div>
           <div className="ml-2 text-[24px] leading-none"> 서브</div>
         </div>
         <div className="mt-3 flex justify-center gap-1">

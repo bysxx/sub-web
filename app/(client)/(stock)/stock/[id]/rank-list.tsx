@@ -15,7 +15,7 @@ export default function RankList({ username, rank, howmuch }: IRankProps) {
       <div className="flex min-w-0">
         <div className="flex items-center text-center	font-semibold text-secondary-d300">{rank}</div>
         <div className="flex items-center">
-          <div className="ml-4 mr-4 flex size-8 justify-center rounded-[12px] bg-white shadow">
+          <div className="mx-4 flex size-8 justify-center rounded-[12px] bg-white shadow">
             <Image src={profileImgSrc} alt="profileimg" width={20} height={20} />
           </div>
         </div>
