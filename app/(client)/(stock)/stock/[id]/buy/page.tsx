@@ -110,7 +110,7 @@ export default function StockBuyPage({ params }: { params: { id: string } }) {
           <span className="text-[16px] font-semibold"> 주</span>
         </div>
         <div className="mb-8 text-left align-bottom font-semibold text-primary-b200">
-          {Number(inputValue) * 500}
+          {Math.round(Number(inputValue) * (stock?.price || 0))}
           <span className="text-[12px] font-medium"> 서브</span>
         </div>
         <div className="grid grid-cols-3 gap-2">
