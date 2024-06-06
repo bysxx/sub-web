@@ -15,7 +15,7 @@ export default function MainPage() {
   const [newsData, setNewsData] = useState<INewsProps[]>([]);
 
   useEffect(() => {
-    fetch(`/server/rooms/665fe129d061b2718711f05a/hints`)
+    fetch(`/server/rooms/666143e233f984e872398b8a/hints`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

@@ -27,7 +27,7 @@ export default function RankListBox({ stockId, roomId, isExpanded, onToggleExpan
   const [rankData, setRankData] = useState<UserStockRank[]>([]);
 
   useEffect(() => {
-    fetch(`/server/stocks/${stockId}/665fe129d061b2718711f05a/userrank`)
+    fetch(`/server/stocks/${stockId}/666143e233f984e872398b8a/userrank`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

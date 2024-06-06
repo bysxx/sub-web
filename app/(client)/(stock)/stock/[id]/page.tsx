@@ -10,7 +10,7 @@ import StandardPriceChart from './stock-standard-chart';
 
 export default function MarketPlacePage({ params }: { params: { id: string } }) {
   const [stock, setStock] = useState<IStock | null>(null);
-  const roomId = '665fe129d061b2718711f05a';
+  const roomId = '666143e233f984e872398b8a';
   const [isRankListBoxExpanded, setIsRankListBoxExpanded] = useState(false);
 
   useEffect(() => {

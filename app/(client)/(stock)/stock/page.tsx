@@ -9,7 +9,7 @@ export default function StockListPage() {
   const [stocks, setStocks] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch('/server/rooms/665fe129d061b2718711f05a/stocks')
+    fetch('/server/rooms/666143e233f984e872398b8a/stocks')
       .then((res) => res.json())
       .then((data) => {
         setStocks(data.stocks);
