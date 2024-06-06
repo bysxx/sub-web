@@ -55,15 +55,9 @@ const processChartData = (product: Product) => {
     date.setDate(today.getDate() - index);
     return {
       date: date.getDate().toString(),
-      price: log.price,
+      price: Math.round(log.price),
     };
   });
-
-  // data.unshift({
-  //   // 오늘 데이터 추가
-  //   date: today.getDate().toString(),
-  //   price: product.price,
-  // });
 
   while (data.length < 4) {
     // 최대 4일치 데이터로 제한

@@ -34,7 +34,7 @@ export function Stock({ id, name, price, changeRate }: IStockProps) {
           <Image src={imageURL} alt="stock" width={40} height={40} />
           <div className="truncate pl-3 text-primary-d400">{name}</div>
           <div className="ml-auto flex items-center">
-            <Image src={changeArrow} alt="chart" width={25} height={100} className="absolute left-3/4" />
+            <Image src={changeArrow} alt="chart" width={25} height={100} className="absolute right-24" />
             <div>
               <div className="text-right text-[15px]">{Math.round(price).toLocaleString('ko-KR')} 서브</div>
               <div

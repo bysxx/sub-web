@@ -10,7 +10,7 @@ export default function StartPage() {
           <div className="text-[32px] font-bold">SUB</div>
         </div>
         <div className="absolute top-3/4">
-          <Link href="/login/classcode">
+          <Link href="/login/username">
             <Image src="/images/icon/Boot_Button01.svg" alt="next" width={80} height={80} className="" />
           </Link>
         </div>

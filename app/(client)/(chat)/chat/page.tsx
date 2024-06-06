@@ -31,10 +31,12 @@ function PlayerChat({ message }: { message: string }) {
   );
 }
 
+const DEFAULT_CHAT: Message[] = [{ sender: 'suvy', text: '안녕! 나는 SUVY야. 주식에 대해 궁금한 거 있으면 물어봐!' }];
+
 export default function MainPage() {
   // const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState<string>('');
-  const { array: messages, push } = useArray<Message>([]);
+  const { array: messages, push } = useArray<Message>(DEFAULT_CHAT);
 
   const handleSend = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,14 +50,13 @@ export default function MainPage() {
   useEffect(() => {
     if (messages.length > 0 && messages[messages.length - 1]?.sender === 'player') {
       const suvyResponses = [
-        '예시 문장입니당. 아무것도 하기 싫어.',
-        '좋은 하루 되세요!',
-        '도와드릴 것이 있나요?',
-        '반갑습니다!',
-        '지금 뭐하고 있나요?',
+        '매수는 주식을 사는 걸 말해! 주식은 회사의 작은 조각들이야. 그래서 매수는 그 회사의 작은 조각들을 사는 거야. 예를 들어, 너가 좋아하는 장난감 가게가 있다고 생각해봐. 그 가게의 작은 조각들을 조금씩 사서 네가 그 가게의 작은 주인이 되는 거야. 이렇게 주식을 사는 걸 매수라고 해! 재미있지?',
       ];
       const randomResponse = suvyResponses[Math.floor(Math.random() * suvyResponses.length)];
-      push({ sender: 'suvy', text: randomResponse || '' });
+
+      setTimeout(() => {
+        push({ sender: 'suvy', text: randomResponse || '' });
+      }, 1000);
     }
   }, [messages]);
 
@@ -95,7 +96,7 @@ export default function MainPage() {
           )}
         </div>
 
-        <form className="sticky bottom-9 w-full rounded-[26px] px-6 py-5 shadow-lg" onSubmit={handleSend}>
+        <form className="fixed bottom-9 w-[calc(100%-64px)] rounded-[26px] px-6 py-5 shadow-lg" onSubmit={handleSend}>
           <input
             placeholder="메세지를 입력하세요."
             className="h-4 w-full text-[16px] leading-none"
